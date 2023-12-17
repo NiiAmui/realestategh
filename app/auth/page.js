@@ -1,18 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import HeroImage from "@/public/vault.png";
-import Image from "next/image";
 import LoginForm from "@/components/auth/LoginForm";
 import RegisterForm from "@/components/auth/RegisterForm";
 
-function Auth() {
+import LogoToHome from "@/components/LogoToHome";
+
+export function Auth() {
   const [currentView, setcurrentView] = useState(false);
 
   return (
     <div className="Authentication flex min-h-screen">
       {/* Form which has the login or registration details */}
       <section className="leftContainer  flex flex-col mt-[7%] mb-[10%] items-center w-full lg:w-[40%] lg:pl-[15px]">
-        <p>Some Logo</p>
+         <LogoToHome />
 
         {/* the toggler between login and register */}
         <div

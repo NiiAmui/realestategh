@@ -8,6 +8,8 @@ import { useState } from "react";
 import {
   UserCircleIcon,
   AdjustmentsHorizontalIcon,
+  LifebuoyIcon,
+  FireIcon, CakeIcon
 } from "@heroicons/react/24/outline";
 import ModalCard from "./ModalCard";
 import RegionTimeFilter from "./RegionTimeFilter";
@@ -17,18 +19,21 @@ export const metadata = {
   description: "Best platform to find your next home",
 };
 
-const TopNavBar = () => {
-    const [openFilter, setopenFilter] = useState(false)
+import LogoToHome from "../LogoToHome";
+import Link from "next/link";
 
-    const closeFilter=()=>{
-        console.log('closing 2222');
-        setopenFilter(false)
-    }
+const TopNavBar = () => {
+  const [openFilter, setopenFilter] = useState(false);
+
+  const closeFilter = () => {
+    console.log("closing 2222");
+    setopenFilter(false);
+  };
   return (
     <>
       <div className="w-full flex justify-between lg:px-8 py-4 border-b items-center">
         {/* logo */}
-        <div className="cursor-pointer testr">Logo</div>
+        <LogoToHome />
 
         {/* MidSection */}
         <div className="p-2 flex  divide-x border rounded-lg">
@@ -38,13 +43,15 @@ const TopNavBar = () => {
         </div>
 
         {/* Profile */}
-        <div>
+        <div className="flex items-center gap-x-4">
           {/* login */}
-          {false && (
-            <div className="flex text-sm divide-x">
+          {true && (
+            <Link href={'/auth'}>
+            <div className="flex text-sm divide-x cursor-pointer" >
               <p className="px-2 font-medium">Sign In</p>
               <p className="px-2 font-medium">Sign Up</p>
             </div>
+            </Link>
           )}
           <UserCircleIcon className="w-8 stroke-[1.5] cursor-pointer" />
         </div>
@@ -53,24 +60,36 @@ const TopNavBar = () => {
         {/* AMENITIES OR FACILITIES */}
         <div className="filters flex gap-6">
           {/* swimming pool */}
-          <div className="flex items-center gap-2 testr">
-          {/* <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" /> */}
-            <label htmlFor="swimming">Swimming Pool</label>
+          <div className="flex items-center gap-2 cursor-pointer">
+            {/*  */}
+            <p>Swimming Pool</p>
+            <div>
+              <LifebuoyIcon className="w-5" />
+            </div>
           </div>
           {/* swimming pool */}
-          <div className="flex items-center gap-2">
-            <input type="checkbox" id="gym" />
-            <label htmlFor="gym">Gym</label>
+          <div className="flex items-center gap-2 cursor-pointer">
+            {/*  */}
+            <p>Gym</p>
+            <div>
+              <FireIcon className="w-5" />
+            </div>
           </div>
           {/* swimming pool */}
-          <div className="flex items-center gap-2">
-            <input type="checkbox" />
-            <label>Swimming Pool</label>
+          <div className="flex items-center gap-2 cursor-pointer">
+            {/*  */}
+            <p>Kitchen</p>
+            <div>
+              <CakeIcon className="w-5" />
+            </div>
           </div>
         </div>
 
         {/* filter */}
-        <div className="flex gap-2 items-center px-3 cursor-pointer py-2 border rounded-lg border-gray-400" onClick={()=>setopenFilter(true)}>
+        <div
+          className="flex gap-2 items-center px-3 cursor-pointer py-2 border rounded-lg border-gray-400"
+          onClick={() => setopenFilter(true)}
+        >
           {/* icon */}
           <AdjustmentsHorizontalIcon className="w-5" />
           {/* text */}
@@ -78,9 +97,11 @@ const TopNavBar = () => {
         </div>
       </div>
 
-      {openFilter && <ModalCard close={()=>closeFilter()}>
-        <RegionTimeFilter />
-      </ModalCard>}
+      {openFilter && (
+        <ModalCard close={() => closeFilter()}>
+          <RegionTimeFilter />
+        </ModalCard>
+      )}
     </>
   );
 };

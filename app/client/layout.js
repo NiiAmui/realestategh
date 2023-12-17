@@ -2,11 +2,12 @@
 
 import { useEffect } from "react";
 
-import "../app/globals.css";
+import "../globals.css";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 import { Providers } from "@/redux/provider";
+import TopNavBar from "@/components/auth/TopNavBar";
 import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        {!pathname.includes("auth") && <TopNavBar />}
         <Providers>{children}</Providers>
       </body>
     </html>

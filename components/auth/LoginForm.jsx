@@ -5,7 +5,6 @@ import EmailInput from "./inputs/EmailInput";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 
-import { loginAlt } from "@/redux/features/auth";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { login } from "@/redux/features/auth/api";
 
