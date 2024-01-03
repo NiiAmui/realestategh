@@ -3,7 +3,7 @@
 import React from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import {
   UserCircleIcon,
@@ -21,8 +21,14 @@ export const metadata = {
 
 import LogoToHome from "../LogoToHome";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const TopNavBar = () => {
+  const params = useParams()
+  useEffect(()=>{
+    console.log('params stuff', params)
+  },[params])
+  
   const [openFilter, setopenFilter] = useState(false);
 
   const closeFilter = () => {
@@ -56,7 +62,9 @@ const TopNavBar = () => {
           <UserCircleIcon className="w-8 stroke-[1.5] cursor-pointer" />
         </div>
       </div>
-      <div className="filters justify-between lg:px-8 py-4 mt-2 text-sm text-gray-600 flex gap-6">
+
+      
+      {!params?.id && <div className="filters justify-between lg:px-8 py-4 mt-2 text-sm text-gray-600 flex gap-6">
         {/* AMENITIES OR FACILITIES */}
         <div className="filters flex gap-6">
           {/* swimming pool */}
@@ -95,7 +103,7 @@ const TopNavBar = () => {
           {/* text */}
           <p>Filter</p>
         </div>
-      </div>
+      </div>}
 
       {openFilter && (
         <ModalCard close={() => closeFilter()}>

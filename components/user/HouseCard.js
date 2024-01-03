@@ -1,9 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-const HouseCard = () => {
+import { useRouter } from "next/navigation";
+
+const HouseCard = ({el}) => {
+  const router = useRouter();
+
   return (
-    <div className="max-w-[200px]">
+    <div className="max-w-[200px]" onClick={()=>router.push(`/rentals/${el}`)}>
       {/* image */}
       <div className="image overflow-hidden max-w-fit">
         <Image

@@ -14,9 +14,6 @@ import { usePathname } from "next/navigation";
 export default function RootLayout({ children }) {
   const pathname = usePathname();
 
-  useEffect(() => {
-    console.log("the pathname is " + pathname);
-  }, [pathname]);
 
   return (
     <html lang="en">

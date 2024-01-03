@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 
 import "../globals.css";
 import { Inter } from "next/font/google";
@@ -12,10 +11,6 @@ import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-
-  useEffect(() => {
-    console.log("the pathname is " + pathname);
-  }, [pathname]);
 
   return (
     <html lang="en">

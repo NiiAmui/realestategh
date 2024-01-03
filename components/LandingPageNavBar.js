@@ -15,7 +15,7 @@ const LandingPageNavBar = () => {
         {/* MidSection */}
         <div className="p-2 flex  divide-x divide-gray-500 border border-gray-500 rounded-lg cursor-pointer">
           <p className="px-3 font-medium">LandLords</p>
-          <Link href={'/client'}>
+          <Link href={'/rentals'}>
           <p className="px-3 font-medium">Find a Place</p>
           </Link>
           {/* <p className="px-3 font-medium">Anywhere</p> */}

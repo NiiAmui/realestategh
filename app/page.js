@@ -16,12 +16,12 @@ const page = () => {
             <p>In a lovely place...</p>
 
             {/* The search inputs */}
-            <div className="searchInput bg-white h-[50px] mt-4 py-1 overflow-hidden grid grid-cols-3 items-center divide-x rounded-md text-gray-600 font-normal pr-1">
+            <div className="searchInput bg-white h-[50px] mt-4 py-1 overflow-hidden grid grid-cols-3 items-center divide-x rounded-md text-gray-600 font-normal px-1">
               {/* Region */}
               <select
                 name="cars"
                 id="cars"
-                className="h-full px-2"
+                className="h-full px-2 rounded-s rounded-e"
                 placeholder="choose Region"
               >
                 <option value="" disabled>
