@@ -3,6 +3,9 @@
 import React from "react";
 import Image from "next/image";
 
+import RatingsAndBadge from "@/components/rentals/RatingsAndBadge";
+import ReserveActionCard from "@/components/rentals/ReserveActionCard";
+
 const imagesURL = [
   "https://a0.muscache.com/im/pictures/miso/Hosting-668146487515150072/original/8ff2a532-e0cd-41a2-9164-554c4d9eb28a.jpeg?im_w=720",
   "https://a0.muscache.com/im/pictures/miso/Hosting-668146487515150072/original/008adf9e-6b52-45bb-924b-38617885b489.jpeg?im_w=720",
@@ -67,7 +70,17 @@ const Page = ({ params }) => {
             <p className="pl-2">{2} bathrooms</p>
       </div>
 
-      
+      {/* content section of the details page */}
+      <div className="contentSection mt-4  grid grid-cols-3 gap-20">
+        {/* left sides */}
+        <section className=" col-span-2 ">
+            <RatingsAndBadge />
+        </section>
+        {/* right sides */}
+        <section className="">
+            <ReserveActionCard />
+        </section>
+      </div>
     </div>
   );
 };
