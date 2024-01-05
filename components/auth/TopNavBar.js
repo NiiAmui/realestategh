@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { usePathname } from 'next/navigation'
 import { useState,useEffect } from "react";
 
 import {
@@ -25,14 +24,14 @@ import { useParams } from "next/navigation";
 
 const TopNavBar = () => {
   const params = useParams()
+  const pathname = usePathname()
   useEffect(()=>{
-    console.log('params stuff', params)
-  },[params])
+    console.log('router stuff', pathname)
+  },[pathname])
   
   const [openFilter, setopenFilter] = useState(false);
 
   const closeFilter = () => {
-    console.log("closing 2222");
     setopenFilter(false);
   };
   return (
@@ -64,7 +63,7 @@ const TopNavBar = () => {
       </div>
 
       
-      {!params?.id && <div className="filters justify-between lg:px-8 py-4 mt-2 text-sm text-gray-600 flex gap-6">
+      {!params?.id && pathname !== '/rentals/tour' && pathname !== '/rentals/tour/rentals/rental' && pathname !== '/rentals/tour/rentals/rental/rental' && <div className="filters justify-between lg:px-8 py-4 mt-2 text-sm text-gray-600 flex gap-6">
         {/* AMENITIES OR FACILITIES */}
         <div className="filters flex gap-6">
           {/* swimming pool */}

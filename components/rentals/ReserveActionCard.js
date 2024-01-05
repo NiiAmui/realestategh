@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const ReserveActionCard = () => {
   return (
@@ -19,7 +20,11 @@ const ReserveActionCard = () => {
 
       {/* Reservation Button */}
       <div className="reserve mt-4">
-        <button className="bg-orange-500 w-full text-white p-2.5 rounded-md">Reserve</button>
+        <Link href="/rentals/tour">
+          <button className="bg-orange-500 w-full text-white p-2.5 rounded-md">
+            Reserve
+          </button>
+        </Link>
       </div>
     </div>
   );
