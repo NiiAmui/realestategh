@@ -20,7 +20,7 @@ const ReserveActionCard = () => {
 
       {/* Reservation Button */}
       <div className="reserve mt-4">
-        <Link href="/rentals/tour">
+        <Link href="/rentals/reservation">
           <button className="bg-orange-500 w-full text-white p-2.5 rounded-md">
             Reserve
           </button>

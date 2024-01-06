@@ -63,7 +63,7 @@ const TopNavBar = () => {
       </div>
 
       
-      {!params?.id && pathname !== '/rentals/tour' && pathname !== '/rentals/tour/rentals/rental' && pathname !== '/rentals/tour/rentals/rental/rental' && <div className="filters justify-between lg:px-8 py-4 mt-2 text-sm text-gray-600 flex gap-6">
+      {!params?.id && pathname !== '/rentals/reservation' && pathname !== '/rentals/tour/rentals/rental' && pathname !== '/rentals/tour/rentals/rental/rental' && <div className="filters justify-between lg:px-8 py-4 mt-2 text-sm text-gray-600 flex gap-6">
         {/* AMENITIES OR FACILITIES */}
         <div className="filters flex gap-6">
           {/* swimming pool */}
