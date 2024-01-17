@@ -11,7 +11,7 @@ const ModalCard = (props) => {
   };
   return (
     <div
-      className="bg-gray-600 bg-opacity-50 overflow-y-auto absolute top-0 left-0 h-full w-full flex"
+      className="bg-gray-600 bg-opacity-50 overflow-y-auto fixed top-0 left-0 min-h-screen w-full flex"
       onClick={(e)=>handleClose(e)}
     >
       {props.children}

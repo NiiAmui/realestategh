@@ -1,19 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
-
-import "../app/globals.css";
+import "../globals.css";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
-import LandingPageNavBar from "@/components/LandingPageNavBar";
+import TopNavBar from "@/components/landlord/TopNavBar";
 
 import { Providers } from "@/redux/provider";
 import { usePathname } from "next/navigation";
+import SideDrawer from "@/components/landlord/SideDrawer";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-
 
   return (
     <html lang="en">
@@ -26,9 +24,20 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body >
-        {pathname == "/" && <LandingPageNavBar />}
-        <Providers>{children}</Providers>
+      <body>
+        <Providers >
+          <di className="w-full flex min-h-screen">
+            {/* left drawer */}
+            <SideDrawer />
+            {/* rightContents */}
+            <div className="rightContents grow">
+              {/* topNavbar */}
+              <TopNavBar />
+              {/* other child pages */}
+              <div >{children}</div>
+            </div>
+          </di>
+        </Providers>
       </body>
     </html>
   );
