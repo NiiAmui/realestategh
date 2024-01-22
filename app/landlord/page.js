@@ -3,10 +3,11 @@ import LandlordStatSummaryCard from "@/components/landlord/dashboard/LandlordSta
 import LandlordPlansCard from "@/components/landlord/dashboard/LandlordPlansCard";
 
 import { ClipboardDocumentCheckIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import RevenueOverviewCard from "@/components/landlord/dashboard/RevenueOverviewCard";
 
 const page = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 mb-20">
       {/* rental stats section*/}
       <div className="rentalStats grid grid-cols-3 gap-14">
         {/* stats cards */}
@@ -93,6 +94,19 @@ const page = () => {
 
         {/* landLordPlans */}
         <LandlordPlansCard />
+      </div>
+
+      {/* REPORTS AND DATA SECTION */}
+      <div className="grid grid-cols-3 gap-14 mt-4">
+        {/* left */}
+        <div className="left col-span-2">
+          <RevenueOverviewCard />
+        </div>
+
+        {/* right */}
+        <div className="right">
+
+        </div>
       </div>
     </div>
   );
