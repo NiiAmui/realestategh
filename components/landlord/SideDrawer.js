@@ -41,7 +41,7 @@ const SideDrawer = () => {
             </Link>
           </li>
           <li className="mt-2">
-            <Link href="/messages">
+            <Link href="/landlord/messages">
               <div className={`linkContainer rounded flex gap-2 px-3 py-2 ${pathname==='/landlord/messages'?'bg-gray-200':''}`}>
                 {/* icon */}
                 <CubeTransparentIcon className="w-4" />
