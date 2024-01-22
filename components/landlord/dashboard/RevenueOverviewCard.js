@@ -16,7 +16,7 @@ const RevenueOveviewCard = () => {
       {/* graph and stats */}
       <div className="grid grid-cols-3">
         {/* graph */}
-        <div className="col-span-2">
+        <div className="col-span-2 p-4">
           <IncomeExpenseBarChart />
         </div>
 

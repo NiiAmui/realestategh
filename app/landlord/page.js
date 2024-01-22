@@ -4,6 +4,8 @@ import LandlordPlansCard from "@/components/landlord/dashboard/LandlordPlansCard
 
 import { ClipboardDocumentCheckIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import RevenueOverviewCard from "@/components/landlord/dashboard/RevenueOverviewCard";
+import LandLordArrearsCard from "@/components/landlord/dashboard/LandLordArrearsCard";
+import BillCollected from "@/components/landlord/dashboard/BillCollected";
 
 const page = () => {
   return (
@@ -104,8 +106,9 @@ const page = () => {
         </div>
 
         {/* right */}
-        <div className="right">
-
+        <div className="right flex flex-col justify-between gap-10">
+          <LandLordArrearsCard />
+          <BillCollected />
         </div>
       </div>
     </div>
