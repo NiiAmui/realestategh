@@ -4,7 +4,7 @@ import { HomeModernIcon } from "@heroicons/react/24/outline";
 
 const LandlordStatSummaryCard = () => {
   return (
-    <div className="landLordStatSummary p-3 pt-5 border flex gap-10">
+    <div className="landLordStatSummary p-6 pt-8 border flex justify-between gap-20">
       {/* header */}
       <div className="header ">
         <p className="font-medium">Welcome back, Samson</p>
@@ -44,8 +44,8 @@ const LandlordStatSummaryCard = () => {
       </div>
 
       {/* svg image of house */}
-      <div className="homeContainer p-4 border-2 rounded-full h-fit ">
-        <HomeModernIcon className="h-24 w-24 text-gray-600" />
+      <div className="homeContainer p-6 border-4 border-gray-400 rounded-full h-fit">
+        <HomeModernIcon className=" w-36 text-gray-400" />
       </div>
     </div>
   );
