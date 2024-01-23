@@ -5,7 +5,7 @@ import { MapPinIcon, HeartIcon, CalendarIcon,BanknotesIcon,BuildingOfficeIcon } 
 
 const PropertyCard = ({rental}) => {
   return (
-    <div className="p-4 shadow flex gap-4 border rounded-md bg-white w-full">
+    <div className="p-4 flex gap-4 border rounded-md bg-white w-full">
       {/* image */}
       <div className="">
         <Image

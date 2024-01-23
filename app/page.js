@@ -1,5 +1,7 @@
 import React from "react";
 
+import { regionsOfGhana } from "@/components/auth/RegionTimeFilter";
+
 const page = () => {
   return (
     <div className="bg-[url('https://images.pexels.com/photos/298842/pexels-photo-298842.jpeg')] bg-cover min-h-screen ">
@@ -27,10 +29,8 @@ const page = () => {
                 <option value="" disabled>
                   choose Region
                 </option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+                {regionsOfGhana.map(region=>(<option value={region?.name} key={region.name}>{region?.name}</option>))}
+                
               </select>
               {/* Duration */}
               <select
