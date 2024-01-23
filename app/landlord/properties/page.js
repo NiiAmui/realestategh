@@ -1,6 +1,10 @@
+'use client'
+
 import React from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import PropertyCard from "@/components/landlord/properties/PropertyCard";
+
+import { useRouter } from 'next/navigation'
 
 
 const rentals = [
@@ -43,6 +47,9 @@ const rentals = [
 ]
 
 const Properties = () => {
+  const router = useRouter()
+
+
   return (
     <div className="p-4">
       {/* header */}
@@ -54,7 +61,7 @@ const Properties = () => {
         <div></div>
 
         {/* Add new btn */}
-        <button className="bg-orange-500 text-white text-xs px-4 py-2 rounded-lg flex items-center justify-between gap-2">
+        <button className="bg-orange-500 text-white text-xs px-4 py-2 rounded-lg flex items-center justify-between gap-2" onClick={()=>{router.push('/landlord/properties/add')}}>
             <PlusIcon className="w-4 text-white"/>
           <p>Add Property</p>
         </button>

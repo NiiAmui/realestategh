@@ -1,13 +1,22 @@
 import React from "react";
 import Image from "next/image";
 
-import { MagnifyingGlassIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
+const demoConversation = [
+  "Hello, the bou is going to school bla bla bla",
+  "Hello, girls just wanna have fun, bla bla bla",
+  "Hello, crazy people are interesting, bla bla bla",
+];
+
+import {
+  MagnifyingGlassIcon,
+  ChatBubbleLeftIcon,
+} from "@heroicons/react/24/outline";
 
 const page = () => {
   return (
     <div className="m-6 grid grid-cols-6 border h-[80vh]">
       {/* left sidebar */}
-      <section className="col-span-2 border-r">
+      <section className="col-span-2 border-r max-h-full">
         {/* chat sideBar */}
         <div className="headerSection p-4 border-b flex gap-4 items-center">
           {/* HEADER section */}
@@ -19,9 +28,9 @@ const page = () => {
                 "https://a0.muscache.com/im/pictures/user/3816a6ef-5cc9-40ed-ae47-406646daa103.jpg?im_w=240"
               }
               alt="image"
-              width={30}
-              height={30}
-              className="rounded-full"
+              width={35}
+              height={35}
+              className="rounded-full max-h-[35px]"
             />
             {/* availability badge */}
             <div className="w-2 h-2 bg-green-500 rounded-full absolute bottom-0 right-0"></div>
@@ -43,38 +52,75 @@ const page = () => {
         <div className="mt-4 p-4">
           {/* header */}
           <p className="font-medium text-lg text-gray-800">Chats</p>
+
+          {/* chat people */}
+          <div className="chatPeople mt-8">
+            {/* contact */}
+            <div className="contact flex gap-3 cursor-pointer">
+              {/* image */}
+              <Image
+                src={
+                  "https://a0.muscache.com/im/pictures/user/3816a6ef-5cc9-40ed-ae47-406646daa103.jpg?im_w=240"
+                }
+                alt="image"
+                width={35}
+                height={35}
+                className="rounded-full object-cover max-h-[35px]"
+              />
+
+              {/* ContactInfo */}
+              <div className="contactInfo">
+                <p className="font-medium">Maxwell Kunadu</p>
+
+                <p className="text-sm italic text-gray-500">Last message</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       {/* conversation area */}
       <section className="col-span-4 max-h-full overflow-hidden relative">
         {/* if there is no selected chat */}
-        <div className="noChat">
-          {/* <img
-            alt="image"
-            src="https://img.freepik.com/free-vector/love-mail-pattern_23-2147495663.jpg?w=1380&t=st=1705987828~exp=1705988428~hmac=8763899f71fdc0285442ecffac4a0c4bb5bbe766dd35ad949a815abf94d10bcc"
-            className="min-w-full"
-          /> */}
-
-          <Image
+        {false && (
+          <div className="noChat object-cover h-full bg-[url('https://img.freepik.com/free-vector/love-mail-pattern_23-2147495663.jpg?w=1380&t=st=1705987828~exp=1705988428~hmac=8763899f71fdc0285442ecffac4a0c4bb5bbe766dd35ad949a815abf94d10bcc')]">
+            {/* <Image
             src={
               "https://img.freepik.com/free-vector/love-mail-pattern_23-2147495663.jpg?w=1380&t=st=1705987828~exp=1705988428~hmac=8763899f71fdc0285442ecffac4a0c4bb5bbe766dd35ad949a815abf94d10bcc"
             }
             alt="image"
             width={500}
             height={500}
-            className="min-w-full"
-          />
+            className="w-full max-h-full"
+          /> */}
 
-          {/* no chat message */}
-          <div className="noChatMessage absolute top-[35%] left-[42%]">
-            <div className="p-4 bg-white rounded-full flex items-center justify-center">
-              <ChatBubbleLeftIcon className="w-20 text-gray-600"/>
+            {/* no chat message */}
+            <div className="noChatMessage absolute top-[35%] left-[42%]">
+              <div className="p-4 bg-white rounded-full flex items-center justify-center">
+                <ChatBubbleLeftIcon className="w-20 text-gray-600" />
+              </div>
+              <p className="px-8 py-3 text-xl text-gray-600 font-medium bg-white rounded-full mt-4">
+                No Messages yet
+              </p>
             </div>
-              <p className="px-8 py-3 text-xl text-gray-600 font-medium bg-white rounded-full mt-4">No Messages yet</p>
           </div>
-        </div>
+        )}
 
         {/* if chat has been selected */}
+        <div className="chatWindow p-4  h-full flex flex-col gap-3">
+          {demoConversation.map((el, idx) => (
+            <div key={idx} className="">
+              <p
+                className={
+                  idx / 2 == 0
+                    ? "bg-gray-300 text-gray-900 w-fit px-2 py-1 rounded text-sm max-w-[50%]"
+                    : "bg-emerald-700 w-[50%] float-right text-white max-w-fit px-2 py-1 rounded text-sm"
+                }
+              >
+                {el}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );
