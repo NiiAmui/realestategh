@@ -4,11 +4,25 @@ import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 
 import { regionsOfGhana } from "@/components/auth/RegionTimeFilter";
 
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const facilities = [
+  "Swimming Pool",
+  "Gym",
+  "Kitchen",
+  "Parking Lot",
+  "Home Office",
+  "Storage Units",
+  'Recreational Space',
+  'Furnish',
+  'Air Conditioning',
+];
+
 import React from "react";
 
 const page = () => {
   return (
-    <div className="p-4 testr grid grid-cols-7 gap-10">
+    <div className="p-4 grid grid-cols-7 gap-10">
       {/* left section - Property Details */}
       <section className="p-4 col-span-4 border rounded">
         {/* header */}
@@ -26,7 +40,7 @@ const page = () => {
         {/* PROPERTY DETAILS */}
 
         {/* Property Information */}
-        <div className="propertyInformation mt-10 grid grid-cols-2 gap-4 testr">
+        <div className="propertyInformation mt-10 grid grid-cols-2 gap-6">
           {/* title */}
           <p className="font-medium col-span-2">Property Information</p>
 
@@ -86,10 +100,161 @@ const page = () => {
             </select>
           </div>
         </div>
+
+        {/* Property Specification */}
+        <div className="propertyInformation mt-10 grid grid-cols-2 gap-6">
+          {/* title */}
+          <p className="font-medium col-span-2">Property Specification</p>
+
+          {/* facilities */}
+          <div className="mt-4 text-gray-600 col-span-2">
+            <p className="text-sm ">Facilities</p>
+            {/* facilities */}
+            <div className="grid grid-cols-3 flex-wrap gap-3 mt-1 text-sm">
+              {facilities.map((el) => (
+                <div
+                  className="regionContainer flex items-center gap-2"
+                  key={el}
+                >
+                  <input type="checkbox" id={el} />
+                  <label htmlFor={el}>{el}</label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Number of bed rooms */}
+          <div className="text-gray-600">
+            <label className="text-sm ">Number of Bed Rooms</label>
+            <select
+              name="livingRooms"
+              id="livingRooms"
+              className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              placeholder="choose Region"
+            >
+              <option value="" disabled>
+                choose bed room number
+              </option>
+              {numbers.map((el) => (
+                <option value={el} key={el}>
+                  {el}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* Number of living rooms */}
+          <div className="text-gray-600">
+            <label className="text-sm ">Number of Kitchens</label>
+            <select
+              name="kitchens"
+              id="kitchens"
+              className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              placeholder="choose Region"
+            >
+              <option value="" disabled>
+                choose number of kitchens
+              </option>
+              {numbers.map((el) => (
+                <option value={el} key={el}>
+                  {el}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* Number of living rooms */}
+          <div className="text-gray-600">
+            <label className="text-sm ">Number of Living Rooms</label>
+            <select
+              name="livingRooms"
+              id="livingRooms"
+              className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              placeholder="choose Region"
+            >
+              <option value="" disabled>
+                choose Living room number
+              </option>
+              {numbers.map((el) => (
+                <option value={el} key={el}>
+                  {el}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* Bathrooms */}
+          <div className="text-gray-600">
+            <label className="text-sm ">Number of Bathrooms</label>
+            <select
+              name="cars"
+              id="cars"
+              className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              placeholder="choose Region"
+            >
+              <option value="" disabled>
+                choose Bathrooms
+              </option>
+              {numbers.map((el) => (
+                <option value={el} key={el}>
+                  {el}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+                {/* Property Pricing */}
+        <div className="propertyInformation mt-10 grid grid-cols-2 gap-6">
+          {/* title */}
+          <p className="font-medium col-span-2">Property Pricing</p>
+
+          {/* Annual Payment */}
+          <div className="mt-4 text-gray-600">
+            <label className="text-sm ">Annual Payment</label>
+            <input
+              type="number"
+              placeholder="12000"
+              className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+            />
+          </div>
+          {/* Monthly Payment */}
+          <div className="mt-4 text-gray-600">
+            <label className="text-sm ">Monthly Installment</label>
+            <input
+              type="number"
+              placeholder="12000"
+              className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+            />
+          </div>
+          {/* Address */}
+          <div className="text-gray-600">
+            <label className="text-sm ">Minimum Rental Duration</label>
+            <input
+              type="number"
+              placeholder="2"
+              className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+            />
+          </div>
+          {/* Date available */}
+          <div className="text-gray-600">
+            <label className="text-sm ">Available Date</label>
+            <input
+              type="date"
+              className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+            />
+          </div>
+        </div>
       </section>
 
       {/* right section - Property Images */}
-      <section className="p-4 col-span-3 border rounded"></section>
+      <section className="p-4 col-span-3 border rounded">
+        {/* title */}
+        <p className="text-lg font-medium">Property Images</p>
+
+        {/* IMAGES */}
+        {/* first Image */}
+        <div>
+          
+        </div>
+      </section>
     </div>
   );
 };
