@@ -2,6 +2,8 @@
 
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 
+import ImageUpload from "@/components/landlord/properties/ImageUpload";
+
 import { regionsOfGhana } from "@/components/auth/RegionTimeFilter";
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -251,8 +253,8 @@ const page = () => {
 
         {/* IMAGES */}
         {/* first Image */}
-        <div>
-          
+        <div className="mt-10">
+          <ImageUpload />
         </div>
       </section>
     </div>

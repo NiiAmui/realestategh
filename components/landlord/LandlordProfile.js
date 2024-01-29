@@ -3,6 +3,8 @@
 import React from "react";
 import { useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import {
   ArrowLeftOnRectangleIcon,
   UserCircleIcon,
@@ -10,6 +12,8 @@ import {
 } from "@heroicons/react/24/outline";
 
 const LandlordProfile = () => {
+  const router = useRouter()
+
   const [showProfile, setShowProfile] = useState(false);
 
   const toggleProfile = () => {
@@ -54,7 +58,7 @@ const LandlordProfile = () => {
 
       {/* Profile Card */}
       {showProfile && (
-        <div className="absolute top-8 right-0 bg-white shadow p-4">
+        <div className="absolute top-8 right-0 bg-white shadow rounded p-4 z-10">
           {/* image and details*/}
           <div className="imageNDetails flex gap-2">
             {/* image */}
@@ -79,7 +83,7 @@ const LandlordProfile = () => {
           {/* go to profile and logout buttons */}
           <div className="mt-6 flex flex-col gap-2">
             {/* profile */}
-            <div className="flex gap-1 text-xs hover:text-green-600">
+            <div className="flex gap-1 text-xs hover:text-green-600" onClick={()=>{router.push('/landlord/profile')}}>
               <UserIcon className="w-4" />
               <p>Profile </p>
             </div>

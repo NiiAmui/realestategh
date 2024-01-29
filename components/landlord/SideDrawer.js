@@ -1,15 +1,16 @@
 'use client'
 
-import { CubeTransparentIcon } from "@heroicons/react/24/solid";
+import { CubeTransparentIcon,HomeModernIcon,EnvelopeIcon } from "@heroicons/react/24/outline";
 import React from "react";
 
 import { useEffect } from "react";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const SideDrawer = () => {
   const pathname = usePathname();
+  const router = useRouter()
 
   useEffect(()=>{
   },[])
@@ -17,7 +18,7 @@ const SideDrawer = () => {
   return (
     <div className="py-4 px-8 border-r sticky h-screen top-0">
       {/* Logo and toggle*/}
-      <div>LOGO</div>
+      <div onClick={()=>{router.push('/landlord')}} className="cursor-pointer">LOGO</div>
 
       {/* Links */}
       <div className="mt-10 text-sm text-gray-700">
@@ -35,7 +36,7 @@ const SideDrawer = () => {
             <Link href="/landlord/properties">
               <div className={`linkContainer rounded flex gap-2 px-3 py-2 ${pathname==='/landlord/properties'?'bg-gray-200':''}`}>
                 {/* icon */}
-                <CubeTransparentIcon className="w-4" />
+                <HomeModernIcon className="w-4" />
                 <p>Properties</p>
               </div>
             </Link>
@@ -44,7 +45,7 @@ const SideDrawer = () => {
             <Link href="/landlord/messages">
               <div className={`linkContainer rounded flex gap-2 px-3 py-2 ${pathname==='/landlord/messages'?'bg-gray-200':''}`}>
                 {/* icon */}
-                <CubeTransparentIcon className="w-4" />
+                <EnvelopeIcon className="w-4" />
                 <p>Messages</p>
               </div>
             </Link>
