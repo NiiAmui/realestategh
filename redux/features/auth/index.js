@@ -1,39 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login } from "./api";
 
 const initialState = {
-  isLoading: false,
-  isloggedIn: false,
-  errorMessage:null,
-  userDetails: {},
+  user: "",
 };
 
-// the auth slice
 const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: initialState,
   reducers: {
-    loginAlt: (state, payload) => {
-      console.log("login inputs", payload);
+    setCredentials: (state, action) => {
+      const userInfo = action.payload;
+      state.user = userInfo;
+    },
+    logout: (state, action) => {
+      state.user = {};
     },
   },
-  extraReducers:(builder)=>{
-    // login
-    builder.addCase(login.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.userDetails = action.payload;
-      state.isloggedIn = true;
-      state.isLoading = false;
-      localStorage.setItem("tokens", JSON.stringify(action.payload.tokens));
-    });
-    builder.addCase(login.rejected, (state, action) => {
-      state.errorMessage = action.error;
-      state.isLoading = false;
-    });
-  }
 });
 
-export const { loginAlt } = authSlice.actions;
-export default authSlice.reducer
+export const { setCredentials, logout } = authSlice.actions;
+export const currentUser = (state)=>state.auth.user
+export default authSlice.reducer;

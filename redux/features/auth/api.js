@@ -1,39 +1,25 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "@/utils/axiosInstance";
+import { apiSlice } from "@/redux/api/apiSlice";
 
-export const login = createAsyncThunk(
-    "auth/login",
-    async (payload, thunkAPI) => {
-      try {
-        const resp = await axiosInstance.post("/auth/login/", payload);
-        return resp.data;
-      } catch (error) {
-        if (!error.response) {
-          throw error;
-        }
-        if (!error.status) {
-          return thunkAPI.rejectWithValue("Network Error");
-        }
-        return thunkAPI.rejectWithValue(error.response.data);
-      }
-    }
-  );
+const authApiSlice = apiSlice.injectEndpoints({
+  endpoints: (builder) => ({
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "/login",
+        method: "POST",
+        body: credentials,
+      }),
+      invalidatesTags:['auth','properties','message']
+    }),
+    register: builder.mutation({
+      query: (userDetails) => ({
+        url: "/user",
+        method: "POST",
+        body: userDetails,
+      }),
+      invalidatesTags:['auth','properties','message']
+    }),
+  }),
+});
 
-  export const register = createAsyncThunk(
-    "auth/register",
-    async (payload, thunkAPI) => {
-      try {
-        const resp = await axiosInstance.post("/auth/signup", payload);
-        console.log('registering payload',payload);
-        return resp.data;
-      } catch (error) {
-        if (!error.response) {
-          throw error;
-        }
-        if (!error.status) {
-          return thunkAPI.rejectWithValue("Network Error");
-        }
-        return thunkAPI.rejectWithValue(error.response.data);
-      }
-    }
-  );
+
+export const {useLoginMutation,useRegisterMutation} = authApiSlice
