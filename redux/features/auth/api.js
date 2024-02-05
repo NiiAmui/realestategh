@@ -8,7 +8,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: credentials,
       }),
-      invalidatesTags:['auth','properties','message']
+      // invalidatesTags:['auth','properties','message']
     }),
     register: builder.mutation({
       query: (userDetails) => ({
@@ -16,10 +16,24 @@ const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: userDetails,
       }),
-      invalidatesTags:['auth','properties','message']
+      // invalidatesTags:['auth','properties','message']
+    }),
+    fetchUser: builder.query({
+      query: () => ({
+        url: "/user",
+        method: "GET",
+      }),
+      // invalidatesTags:['auth','properties','message']
+    }),
+    tryPing: builder.query({
+      query: () => ({
+        url: "/ping",
+        method: "GET",
+      }),
+      // invalidatesTags:['auth','properties','message']
     }),
   }),
 });
 
 
-export const {useLoginMutation,useRegisterMutation} = authApiSlice
+export const {useLoginMutation,useRegisterMutation,useFetchUserQuery,useTryPingQuery} = authApiSlice

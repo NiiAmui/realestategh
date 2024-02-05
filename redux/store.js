@@ -7,8 +7,9 @@ import { apiSlice } from "./api/apiSlice";
 
 // setup the store with the various reducers
 export const store = configureStore({
-  reducer: { [apiSlice.reducerPath]: apiSlice.reducer, ...reducers },
+  // reducer: { [apiSlice.reducerPath]: apiSlice.reducer, ...reducers },
+  reducer: reducers,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware({ serializableCheck:false}).concat(apiSlice.middleware),
   devTools: true,
 });

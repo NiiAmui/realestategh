@@ -29,21 +29,13 @@ function RegisterForm() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-console.log({
-  firstname: firstName,
-  lastname: lastName,
-  email: email,
-  password: password,
-  role: userType?.value,
-})
     await register({
-      firstname: firstName,
-      lastname: lastName,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password,
-      role: userType?.value,
-    }).unwrap()
-
+      role: userType,
+    }).unwrap();
   };
   return (
     <form>
