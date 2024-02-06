@@ -7,9 +7,16 @@ import axios from "axios";
 
 import { useLoginMutation, useTryPingQuery } from "@/redux/features/auth/api";
 
-import { setCredentials } from "@/redux/features/auth";
+import {
+  currentUser,
+  setCredentials,
+  setUserDetails,
+} from "@/redux/features/auth";
+
+import { useSelector } from "react-redux";
 
 import { unwrapResult } from "@reduxjs/toolkit";
+import { useEffect } from "react";
 // import { login } from "@/redux/features/auth/api";
 
 function LoginForm() {
@@ -17,11 +24,14 @@ function LoginForm() {
   const [password, setpassword] = useState(null);
 
   const [login] = useLoginMutation();
-  const { data, isLoading } = useTryPingQuery();
+  const { data, isLoading, error } = useTryPingQuery();
 
   const router = useRouter();
 
   const dispatch = useDispatch();
+
+  const newUser = useSelector((state) => state.auth.user);
+  // const newUser = currentUser()
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -33,11 +43,17 @@ function LoginForm() {
       .then((res) => {
         console.log("resssss", res);
         dispatch(setCredentials(res.token));
-        localStorage.setItem("token", res?.token);
-        return res.token;
+        dispatch(setUserDetails(res.user))
+        // localStorage.setItem("token", res?.token);
+        return res;
       })
       .then((res) => {
-        axios("http://localhost:8080/ping");
+        console.log('new user',newUser)
+        if (newUser.role.name == "TENANT") {
+          router.push("rentals");
+        } else {
+          router.push("landlord");
+        }
       });
   };
 

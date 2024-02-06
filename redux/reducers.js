@@ -9,7 +9,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 // configuration for the persisted reducer
 const persistConfig = {
-  key: "root",
+  key: "realestate",
   version: 1,
   storage,
 };

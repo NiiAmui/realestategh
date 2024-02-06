@@ -4,6 +4,8 @@ import DateInput from "./inputs/DateInput";
 import EmailInput from "./inputs/EmailInput";
 import PasswordInput from "./inputs/PasswordInput";
 
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -16,7 +18,10 @@ const userTypes = [
   { description: "LandLord", value: "LANDLORD" },
 ];
 
-function RegisterForm() {
+function RegisterForm({setcurrentView}) {
+const router = useRouter()
+
+
   const [firstName, setfirstName] = useState(null);
   const [lastName, setlastName] = useState(null);
   const [email, setemail] = useState(null);
@@ -35,7 +40,9 @@ function RegisterForm() {
       email: email,
       password: password,
       role: userType,
-    }).unwrap();
+    }).unwrap().then(()=>{
+      setcurrentView(false)
+    });
   };
   return (
     <form>

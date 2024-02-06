@@ -41,7 +41,7 @@ export function Auth() {
         {/* authentication forms */}
         <div className="mt-5 w-[70%] transition-all duration-500 ease-in-out">
           {!currentView && <LoginForm />}
-          {currentView && <RegisterForm />}
+          {currentView && <RegisterForm setcurrentView={setcurrentView}/>}
         </div>
       </section>
 
