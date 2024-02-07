@@ -14,7 +14,6 @@ import { usePathname } from "next/navigation";
 export default function RootLayout({ children }) {
   const pathname = usePathname();
 
-
   return (
     <html lang="en">
       <head>
@@ -26,9 +25,11 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body >
-        {pathname == "/" && <LandingPageNavBar />}
-        <Providers>{children}</Providers>
+      <body>
+        <Providers>
+          {pathname == "/" && <LandingPageNavBar />}
+          {children}
+        </Providers>
       </body>
     </html>
   );

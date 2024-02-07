@@ -3,9 +3,14 @@
 import React from "react";
 import Link from "next/link";
 
+import { useSelector } from "react-redux";
+import { isLoggedIn } from "@/redux/features/auth";
+
 import LogoToHome from "./LogoToHome";
 
 const LandingPageNavBar = () => {
+  const loginStatus = useSelector(isLoggedIn)
+
   return (
     <div className="px-8 absolute min-w-full text-gray-500">
       <div className="w-full flex justify-between py-4 items-center">
@@ -24,7 +29,7 @@ const LandingPageNavBar = () => {
         {/* Profile */}
         <div className="flex items-center gap-x-4">
           {/* login */}
-          {true && (
+          {!loginStatus && (
             <Link href={"/auth"}>
               <div className="flex text-sm divide-x divide-gray-500 cursor-pointer">
                 <p className="px-2 font-medium">Sign In</p>

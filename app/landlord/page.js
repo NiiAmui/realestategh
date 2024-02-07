@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import LandlordStatSummaryCard from "@/components/landlord/dashboard/LandlordStatSummaryCard";
 import LandlordPlansCard from "@/components/landlord/dashboard/LandlordPlansCard";
@@ -7,14 +9,21 @@ import RevenueOverviewCard from "@/components/landlord/dashboard/RevenueOverview
 import LandLordArrearsCard from "@/components/landlord/dashboard/LandLordArrearsCard";
 import BillCollected from "@/components/landlord/dashboard/BillCollected";
 
+import { useSelector, UseSelector } from "react-redux/es/hooks/useSelector";
+import { currentUser } from "@/redux/features/auth";
+
 const page = () => {
+  const user = useSelector(currentUser)
+
+
   return (
+    
     <div className="p-4 mb-20">
       {/* rental stats section*/}
       <div className="rentalStats grid grid-cols-3 gap-14">
         {/* stats cards */}
         <div className="statsCards col-span-2">
-          <LandlordStatSummaryCard />
+          <LandlordStatSummaryCard user={user}/>
 
           {/* action cards */}
           <div className="actionCards grid grid-cols-3 gap-4 mt-4">

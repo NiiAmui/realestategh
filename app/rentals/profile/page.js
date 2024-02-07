@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import { useState, useEffect } from "react";
@@ -7,25 +7,24 @@ import { useSelector } from "react-redux";
 import { currentUser } from "@/redux/features/auth";
 
 const page = () => {
-  const user = useSelector(currentUser)
+  const user = useSelector(currentUser);
 
-    const [firstname, setfirstname] = useState('')
-    const [lastName, setlastName] = useState('')
-    const [email, setEmail] = useState('')
-    const [birthdate, setBirthdate] = useState('')
-    const [about, setabout] = useState('')
-    const [twitter, setTwitter] = useState('')
-    const [facebook, setFacebook] = useState('')
-    const [instagram, setInstagram] = useState('')
-    const [image, setImage] = useState('')
+  const [firstname, setfirstname] = useState("");
+  const [lastName, setlastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthdate, setBirthdate] = useState("");
+  const [about, setabout] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [instagram, setInstagram] = useState("");
 
-    useEffect(()=>{
-      if(user){
-          setfirstname(user.first_name)
-          setlastName(user.last_name)
-          setEmail(user.email)
-      }
-  },[])
+  useEffect(() => {
+    if (user) {
+      setfirstname(user.first_name);
+      setlastName(user.last_name);
+      setEmail(user.email);
+    }
+  }, []);
 
   return (
     <div className="grid grid-cols-2 m-4 gap-8 mb-14">
@@ -47,7 +46,7 @@ const page = () => {
 
           {/* Name and Role type */}
           <div className="mt-8 text-center mb-2">
-            <p className="text-sm font-semibold">Angela Newson</p>
+            <p className="text-sm font-semibold">{`${user.first_name} ${user?.last_name}`}</p>
             <p>
               <span className="text-xs text-gray-400">Account type:</span>{" "}
               <span className="text-xs font-medium">{user?.role?.name}</span>
@@ -167,7 +166,9 @@ const page = () => {
 
           {/* update button */}
           <div className="mt-4 text-sm">
-            <button className="bg-orange-500 text-white px-8 py-2 rounded">Save changes</button>
+            <button className="bg-orange-500 text-white px-8 py-2 rounded">
+              Save changes
+            </button>
           </div>
         </div>
 
@@ -210,7 +211,9 @@ const page = () => {
 
           {/* update button */}
           <div className="mt-4 text-sm">
-            <button className="bg-orange-500 text-white px-8 py-2 rounded">Change Password</button>
+            <button className="bg-orange-500 text-white px-8 py-2 rounded">
+              Change Password
+            </button>
           </div>
         </div>
       </section>

@@ -2,12 +2,12 @@ import React from "react";
 
 import { HomeModernIcon } from "@heroicons/react/24/outline";
 
-const LandlordStatSummaryCard = () => {
+const LandlordStatSummaryCard = ({user}) => {
   return (
     <div className="landLordStatSummary p-6 pt-8 border flex justify-between gap-20">
       {/* header */}
       <div className="header ">
-        <p className="font-medium">Welcome back, Samson</p>
+        <p className="font-medium">Welcome back, {user?.first_name}</p>
         <p className="text-gray-500 text-sm">
           This is your property portfolio report
         </p>

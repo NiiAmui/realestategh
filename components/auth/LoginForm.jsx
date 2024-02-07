@@ -24,7 +24,6 @@ function LoginForm() {
   const [password, setpassword] = useState(null);
 
   const [login] = useLoginMutation();
-  const { data, isLoading, error } = useTryPingQuery();
 
   const router = useRouter();
 
@@ -41,7 +40,6 @@ function LoginForm() {
     })
       .unwrap()
       .then((res) => {
-        console.log("resssss", res);
         dispatch(setCredentials(res.token));
         dispatch(setUserDetails(res.user))
         // localStorage.setItem("token", res?.token);
@@ -49,7 +47,7 @@ function LoginForm() {
       })
       .then((res) => {
         console.log('new user',newUser)
-        if (newUser.role.name == "TENANT") {
+        if (newUser?.role?.name == "TENANT") {
           router.push("rentals");
         } else {
           router.push("landlord");

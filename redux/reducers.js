@@ -2,6 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 
 // import all the other reducers
 import authReducer from "./features/auth/index";
+import landlordReducer from './features/landlord/index'
 
 // the package to persist the reducers
 import { persistReducer } from "redux-persist";
@@ -17,6 +18,7 @@ const persistConfig = {
 // the reducers combined
 const reducers = combineReducers({
   auth: authReducer,
+  landlord:landlordReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

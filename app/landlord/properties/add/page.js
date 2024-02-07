@@ -6,6 +6,8 @@ import ImageUpload from "@/components/landlord/properties/ImageUpload";
 
 import { regionsOfGhana } from "@/components/auth/RegionTimeFilter";
 
+import { useState } from "react";
+
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const facilities = [
@@ -23,6 +25,26 @@ const facilities = [
 import React from "react";
 
 const page = () => {
+  const [name,setName] = useState('')
+  const [description,setDescription] = useState('')
+  const [region, setregion] = useState('')
+  const [address, setaddress] = useState('')
+  const [unitNumber, setunitNumber] = useState(null)
+  const [city, setcity] = useState('')
+  const [facilitites, setfacilitites] = useState([])
+  const [bedRooms, setbedRooms] = useState(null)
+  const [kitchens, setkitchens] = useState(null)
+  const [livingRooms, setlivingRooms] = useState(null)
+  const [bathrooms, setbathrooms] = useState(null)
+  const [price, setprice] = useState(null)
+  const [duration, setduration] = useState(null)
+  const [availableDate, setavailableDate] = useState(null)
+  const [images, setimages] = useState([])
+  
+
+
+
+
   return (
     <div className="p-4 grid grid-cols-7 gap-10">
       {/* left section - Property Details */}
@@ -100,6 +122,16 @@ const page = () => {
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* property Description */}
+          <div className="mt-4 text-gray-600 col-span-2">
+            <label className="text-sm ">Property Description</label>
+            <textarea
+              placeholder="Description"
+              className="border w-full rounded px-2 py-1 mt-1"
+              rows={4}
+            />
           </div>
         </div>
 
@@ -208,7 +240,7 @@ const page = () => {
           {/* title */}
           <p className="font-medium col-span-2">Property Pricing</p>
 
-          {/* Annual Payment */}
+          {/* Annual Payment or price */}
           <div className="mt-4 text-gray-600">
             <label className="text-sm ">Annual Payment</label>
             <input
@@ -226,7 +258,7 @@ const page = () => {
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
             />
           </div>
-          {/* Address */}
+          {/* rental duration */}
           <div className="text-gray-600">
             <label className="text-sm ">Minimum Rental Duration</label>
             <input
