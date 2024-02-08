@@ -1,8 +1,19 @@
+'use client'
+
 import React from "react";
+
+import { useDispatch } from "react-redux";
+
+import { setSelectedRegion,setSelectedDuration } from "@/redux/features/tenant";
 
 import { regionsOfGhana } from "@/components/auth/RegionTimeFilter";
 
+import { useRouter } from "next/navigation";
+
 const page = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
+
   return (
     <div className="bg-[url('https://images.pexels.com/photos/298842/pexels-photo-298842.jpeg')] bg-cover min-h-screen ">
       <div className="content  pt-20 px-8 min-h-screen flex items-center">
@@ -25,6 +36,7 @@ const page = () => {
                 id="cars"
                 className="h-full px-2 rounded-s rounded-e"
                 placeholder="choose Region"
+                onChange={(e)=>{dispatch(setSelectedRegion(e.target.value))}}
               >
                 <option value="" disabled>
                   choose Region
@@ -38,6 +50,7 @@ const page = () => {
                 id="cars"
                 className="h-full px-2"
                 placeholder="choose Region"
+                onChange={(e)=>{dispatch(setSelectedDuration(e.target.value))}}
               >
                 <option value="" disabled>
                   choose Region
@@ -48,7 +61,7 @@ const page = () => {
               </select>
 
               {/* search Btn */}
-              <button className="bg-yellow-500 ml-2 text-white h-full rounded">
+              <button className="bg-yellow-500 ml-2 text-white h-full rounded" onClick={()=>router.push('/rentals')}>
                 Search
               </button>
             </div>

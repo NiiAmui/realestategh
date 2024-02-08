@@ -1,5 +1,18 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+
+import { useSelector } from "react-redux";
+import { selectedRegions } from "@/redux/features/tenant";
+
+import {
+  setSelectedRegion,
+  setSelectedRegions,
+  setSelectedDuration,
+  setStartDate,
+  setEndDate,
+} from "@/redux/features/tenant";
+
 export const regionsOfGhana = [
   {
     name: "Ahafo Region",
@@ -64,6 +77,28 @@ export const regionsOfGhana = [
 ];
 
 const RegionTimeFilter = () => {
+  const dispatch = useDispatch();
+
+  const filteredRegions = useSelector(selectedRegions);
+
+  const handleCheckboxChange = (item) => {
+    // setfacilities((prevSelectedItems) => {
+    //   if (prevSelectedItems.includes(item)) {
+    //     return prevSelectedItems.filter((i) => i !== item);
+    //   } else {
+    //     return [...prevSelectedItems, item];
+    //   }
+    // });
+    const tempFunc = () => {
+      if (filteredRegions.includes(item)) {
+        return filteredRegions.filter((i) => i == item);
+      } else {
+        return [...filteredRegions, item.name];
+      }
+    };
+    dispatch(setSelectedRegions(tempFunc()));
+  };
+
   return (
     <div className=" bg-white rounded-lg mx-auto my-auto px-8 py-5  w-[600px]">
       {/* title */}
@@ -72,11 +107,16 @@ const RegionTimeFilter = () => {
       {/* Duration rate range */}
       <div className="grid grid-cols-2 mt-4 gap-5">
         {/* range */}
-        <label className="font-medium">
-          Choose rent duration:
-        </label>
+        <label className="font-medium">Choose rent duration:</label>
         <div className="range flex gap-4">
-          <select name="cars" id="cars" className="flex-grow p-2 rounded">
+          <select
+            name="cars"
+            id="cars"
+            className="flex-grow p-2 rounded"
+            onChange={(e) => {
+              dispatch(setSelectedDuration(e.target.value));
+            }}
+          >
             <option value="1">One Year</option>
             <option value="2">2 Years</option>
             <option value="3">3 Years</option>
@@ -87,12 +127,24 @@ const RegionTimeFilter = () => {
         {/* start date */}
         <div className="startDate flex flex-col text-sm">
           <p className="font-medium">Start Date</p>
-          <input type="date" className="flex-grow  p-2 rounded border mt-1" />
+          <input
+            type="date"
+            className="flex-grow  p-2 rounded border mt-1"
+            onChange={(e) => {
+              dispatch(setStartDate(e.target.value));
+            }}
+          />
         </div>
         {/* start date */}
         <div className="startDate flex flex-col text-sm ">
           <p className="font-medium">End Date</p>
-          <input type="date" className="flex-grow p-2 rounded border mt-1" />
+          <input
+            type="date"
+            className="flex-grow p-2 rounded border mt-1"
+            onChange={(e) => {
+              dispatch(setEndDate(e.target.value));
+            }}
+          />
         </div>
 
         {/* regions */}
@@ -103,8 +155,18 @@ const RegionTimeFilter = () => {
           {/* container for selecting the regions */}
           <div className="containerForAllRegions grid grid-cols-3 flex-wrap gap-3 mt-1 text-sm">
             {regionsOfGhana.map((el) => (
-              <div className="regionContainer flex items-center gap-2" key={el.name}>
-                <input type="checkbox" id={el.name}/>
+              <div
+                className="regionContainer flex items-center gap-2"
+                key={el.name}
+              >
+                <input
+                  type="checkbox"
+                  id={el.name}
+                  checked={filteredRegions.includes(el)}
+                  onChange={() => {
+                    handleCheckboxChange(el);
+                  }}
+                />
                 <label htmlFor={el.name}>{el.name}</label>
               </div>
             ))}

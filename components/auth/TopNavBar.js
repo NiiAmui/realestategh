@@ -47,7 +47,7 @@ const TopNavBar = () => {
         {/* MidSection */}
         {pathname !== "/rentals/profile" && <div className="p-2 flex  divide-x border rounded-lg">
           <p className="px-3 font-medium">Anywhere</p>
-          <p className="px-3 font-medium">Any Time</p>
+          <p className="px-3 font-medium">Any How</p>
           <p className="px-3 font-medium">Anywhere</p>
         </div>}
 
