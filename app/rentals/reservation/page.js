@@ -6,8 +6,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { isLoggedIn } from "@/redux/features/auth";
 
+import { property } from "@/redux/features/landlord";
+
 const page = () => {
   const loginStatus = useSelector(isLoggedIn);
+  const landlordProperty = useSelector(property)
 
   return (
     <div className="px-8">

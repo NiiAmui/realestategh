@@ -1,21 +1,32 @@
 import React from "react";
 import Image from "next/image";
-import { MapPinIcon, HeartIcon, CalendarIcon,BanknotesIcon,BuildingOfficeIcon } from "@heroicons/react/24/outline";
+import {
+  MapPinIcon,
+  HeartIcon,
+  CalendarIcon,
+  BanknotesIcon,
+  BuildingOfficeIcon,
+} from "@heroicons/react/24/outline";
 
-
-const PropertyCard = ({rental}) => {
+const PropertyCard = ({ rental }) => {
   return (
     <div className="p-4 flex gap-4 border rounded-md bg-white w-full">
       {/* image */}
-      <div className="">
-        <Image
+      <div className="w-[150px] object-cover rounded-md overflow-hidden">
+        {/* <Image
           src={
-            rental.image
+            rental?.images[0]?.blob
           }
           alt="image"
           width={120}
           height={120}
           className="rounded-md"
+        /> */}
+
+        <img
+          alt="image"
+          src={rental?.images[0]?.blob}
+          className="min-w-full object-cover rounded-md"
         />
       </div>
 
@@ -27,12 +38,20 @@ const PropertyCard = ({rental}) => {
           <p className="text-lg font-medium">{rental?.name}</p>
           {/* rental status */}
           <div className="rentalStatus text-right">
-            {rental.tenant && <p className="bg-green-300 w-fit px-3 py-1 rounded-lg text-white text-xs">Occupied</p>}
-            {!rental.tenant && <p className="bg-red-300 w-fit px-3 py-1 rounded-lg text-white text-xs">UnOccupied</p>}
+            {rental.tenant && (
+              <p className="bg-green-300 w-fit px-3 py-1 rounded-lg text-white text-xs">
+                Occupied
+              </p>
+            )}
+            {!rental.tenant && (
+              <p className="bg-red-300 w-fit px-3 py-1 rounded-lg text-white text-xs">
+                UnOccupied
+              </p>
+            )}
           </div>
           {/* rent per month */}
           <div className="text-right">
-            <p className="font-medium">${rental.rent}</p>
+            <p className="font-medium">${rental.price}</p>
             <p className="text-xs text-gray-400">per month</p>
           </div>
         </div>
@@ -41,7 +60,7 @@ const PropertyCard = ({rental}) => {
           {/* icon */}
           <MapPinIcon className="w-4" />
           {/* location Name */}
-          <p className="text-xs">{rental.location}</p>
+          <p className="text-xs">{rental.address}</p>
         </div>
         {/* Lower info cards */}
         <div className="lowerInfoCards mt-4 flex justify-between divide-x">
@@ -63,7 +82,7 @@ const PropertyCard = ({rental}) => {
             {/* Details */}
             <div className="details">
               <p className="text-xs text-gray-400">Down Payment</p>
-              <p className="font-medium">${rental.downPayment}</p>
+              <p className="font-medium">20 %</p>
             </div>
           </div>
           {/* Tenant */}
@@ -73,7 +92,7 @@ const PropertyCard = ({rental}) => {
             {/* Details */}
             <div className="details">
               <p className="text-xs text-gray-400">Tenant</p>
-              <p className="font-medium">{rental.tenant}</p>
+              <p className="font-medium text-xs">N/A</p>
             </div>
           </div>
           {/* End Date */}
@@ -83,7 +102,7 @@ const PropertyCard = ({rental}) => {
             {/* Details */}
             <div className="details">
               <p className="text-xs text-gray-400">End Date</p>
-              <p className="font-medium">{rental.endDate}</p>
+              <p className="font-medium text-xs">N/A</p>
             </div>
           </div>
         </div>

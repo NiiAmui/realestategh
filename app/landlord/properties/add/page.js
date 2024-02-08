@@ -8,42 +8,78 @@ import { regionsOfGhana } from "@/components/auth/RegionTimeFilter";
 
 import { useState } from "react";
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+import { useSelector } from "react-redux";
+import { useAddPropertyMutation } from "@/redux/features/landlord/api";
 
-const facilities = [
+const numbers = [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const availableFacilities = [
   "Swimming Pool",
   "Gym",
   "Kitchen",
   "Parking Lot",
   "Home Office",
   "Storage Units",
-  'Recreational Space',
-  'Furnish',
-  'Air Conditioning',
+  "Recreational Space",
+  "Furnish",
+  "Air Conditioning",
 ];
 
 import React from "react";
 
 const page = () => {
-  const [name,setName] = useState('')
-  const [description,setDescription] = useState('')
-  const [region, setregion] = useState('')
-  const [address, setaddress] = useState('')
-  const [unitNumber, setunitNumber] = useState(null)
-  const [city, setcity] = useState('')
-  const [facilitites, setfacilitites] = useState([])
-  const [bedRooms, setbedRooms] = useState(null)
-  const [kitchens, setkitchens] = useState(null)
-  const [livingRooms, setlivingRooms] = useState(null)
-  const [bathrooms, setbathrooms] = useState(null)
-  const [price, setprice] = useState(null)
-  const [duration, setduration] = useState(null)
-  const [availableDate, setavailableDate] = useState(null)
-  const [images, setimages] = useState([])
-  
+  const [addProperty, { isLoading, error }] = useAddPropertyMutation();
 
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [region, setregion] = useState("");
+  const [address, setaddress] = useState("");
+  const [unitNumber, setunitNumber] = useState(null);
+  const [city, setcity] = useState("");
+  const [facilities, setfacilities] = useState([]);
+  const [bedRooms, setbedRooms] = useState(null);
+  const [kitchens, setkitchens] = useState(null);
+  const [livingRooms, setlivingRooms] = useState(null);
+  const [bathrooms, setbathrooms] = useState(null);
+  const [price, setprice] = useState(null);
+  const [duration, setduration] = useState(null);
+  const [availableDate, setavailableDate] = useState(null);
+  const [fileList, setFileList] = useState([]);
 
+  const handleCheckboxChange = (item) => {
+    setfacilities((prevSelectedItems) => {
+      if (prevSelectedItems.includes(item)) {
+        return prevSelectedItems.filter((i) => i !== item);
+      } else {
+        return [...prevSelectedItems, item];
+      }
+    });
+  };
 
+  const handleAddProperty = async (e) => {
+    e.preventDefault();
+    await addProperty({
+      address: address,
+      availableTime: availableDate,
+      bathrooms: +bathrooms,
+      bedrooms: +bedRooms,
+      description: description,
+      durationTime: duration,
+      name: name,
+      price: price,
+      region: region,
+      status: "Unoccupied",
+      unit_number: unitNumber,
+      facilities: facilities.map((el) => ({ description: el, name: el })),
+      city,
+      kitchens: +kitchens,
+      livingRooms : +livingRooms,
+      images: fileList.map((el) => ({
+        // el?.thumbUrl
+        blob: el?.thumbUrl,
+      })),
+    });
+  };
 
   return (
     <div className="p-4 grid grid-cols-7 gap-10">
@@ -55,7 +91,7 @@ const page = () => {
           <p className="font-medium text-lg">Property Details</p>
 
           {/* Publish Property */}
-          <button className="publishProperty flex items-center gap-2 px-3 py-2 bg-orange-500 text-white rounded text-sm">
+          <button className="publishProperty flex items-center gap-2 px-3 py-2 bg-orange-500 text-white rounded text-sm" onClick={(e)=>{handleAddProperty(e)}}>
             <CloudArrowUpIcon className="w-4" />
             <p>Publish Property</p>
           </button>
@@ -75,6 +111,10 @@ const page = () => {
               type="text"
               placeholder="Schiller Villa of Atlantis"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </div>
           {/* Address */}
@@ -84,6 +124,10 @@ const page = () => {
               type="text"
               placeholder="East Legon Hills"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={address}
+              onChange={(e) => {
+                setaddress(e.target.value);
+              }}
             />
           </div>
           {/* Unit Number */}
@@ -93,6 +137,10 @@ const page = () => {
               type="text"
               placeholder="RM 4"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={unitNumber}
+              onChange={(e) => {
+                setunitNumber(e.target.value);
+              }}
             />
           </div>
           {/* City */}
@@ -102,6 +150,10 @@ const page = () => {
               type="text"
               placeholder="Schiller Villa of Atlantis"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={city}
+              onChange={(e) => {
+                setcity(e.target.value);
+              }}
             />
           </div>
           {/* region */}
@@ -112,6 +164,10 @@ const page = () => {
               id="cars"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
               placeholder="choose Region"
+              value={region}
+              onChange={(e) => {
+                setregion(e.target.value);
+              }}
             >
               <option value="" disabled>
                 choose Region
@@ -131,6 +187,10 @@ const page = () => {
               placeholder="Description"
               className="border w-full rounded px-2 py-1 mt-1"
               rows={4}
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -145,12 +205,19 @@ const page = () => {
             <p className="text-sm ">Facilities</p>
             {/* facilities */}
             <div className="grid grid-cols-3 flex-wrap gap-3 mt-1 text-sm">
-              {facilities.map((el) => (
+              {availableFacilities.map((el) => (
                 <div
                   className="regionContainer flex items-center gap-2"
                   key={el}
                 >
-                  <input type="checkbox" id={el} />
+                  <input
+                    type="checkbox"
+                    id={el}
+                    checked={facilities.includes(el)}
+                    onChange={() => {
+                      handleCheckboxChange(el);
+                    }}
+                  />
                   <label htmlFor={el}>{el}</label>
                 </div>
               ))}
@@ -165,6 +232,10 @@ const page = () => {
               id="livingRooms"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
               placeholder="choose Region"
+              value={bedRooms}
+              onChange={(e) => {
+                setbedRooms(e.target.value);
+              }}
             >
               <option value="" disabled>
                 choose bed room number
@@ -184,6 +255,10 @@ const page = () => {
               id="kitchens"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
               placeholder="choose Region"
+              value={kitchens}
+              onChange={(e) => {
+                setkitchens(e.target.value);
+              }}
             >
               <option value="" disabled>
                 choose number of kitchens
@@ -203,6 +278,10 @@ const page = () => {
               id="livingRooms"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
               placeholder="choose Region"
+              value={livingRooms}
+              onChange={(e) => {
+                setlivingRooms(e.target.value);
+              }}
             >
               <option value="" disabled>
                 choose Living room number
@@ -222,6 +301,10 @@ const page = () => {
               id="cars"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
               placeholder="choose Region"
+              value={bathrooms}
+              onChange={(e) => {
+                setbathrooms(e.target.value);
+              }}
             >
               <option value="" disabled>
                 choose Bathrooms
@@ -235,7 +318,7 @@ const page = () => {
           </div>
         </div>
 
-                {/* Property Pricing */}
+        {/* Property Pricing */}
         <div className="propertyInformation mt-10 grid grid-cols-2 gap-6">
           {/* title */}
           <p className="font-medium col-span-2">Property Pricing</p>
@@ -247,6 +330,10 @@ const page = () => {
               type="number"
               placeholder="12000"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={price}
+              onChange={(e) => {
+                setprice(e.target.value);
+              }}
             />
           </div>
           {/* Monthly Payment */}
@@ -255,7 +342,9 @@ const page = () => {
             <input
               type="number"
               placeholder="12000"
+              value={(price/12) || 0}
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              disabled
             />
           </div>
           {/* rental duration */}
@@ -265,6 +354,10 @@ const page = () => {
               type="number"
               placeholder="2"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={duration}
+              onChange={(e) => {
+                setduration(e.target.value);
+              }}
             />
           </div>
           {/* Date available */}
@@ -273,6 +366,10 @@ const page = () => {
             <input
               type="date"
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={availableDate}
+              onChange={(e) => {
+                setavailableDate(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -286,7 +383,7 @@ const page = () => {
         {/* IMAGES */}
         {/* first Image */}
         <div className="mt-10">
-          <ImageUpload />
+          <ImageUpload fileList={fileList} setFileList={setFileList} />
         </div>
       </section>
     </div>

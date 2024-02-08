@@ -3,9 +3,12 @@
 import React from "react";
 import Image from "next/image";
 
+import { property } from "@/redux/features/landlord";
+import { useSelector } from "react-redux";
+
 import RatingsAndBadge from "@/components/rentals/RatingsAndBadge";
 import ReserveActionCard from "@/components/rentals/ReserveActionCard";
-import { WifiIcon } from "@heroicons/react/24/outline";
+import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
 
 const imagesURL = [
   "https://a0.muscache.com/im/pictures/miso/Hosting-668146487515150072/original/8ff2a532-e0cd-41a2-9164-554c4d9eb28a.jpeg?im_w=720",
@@ -32,25 +35,33 @@ Array.prototype.restrictQuantity = function () {
 };
 
 const Page = ({ params }) => {
+  const storeProperty = useSelector(property);
+
   return (
     <div className="px-8 mt-6 mb-20">
       {/* header or title */}
-      <p className="text-xl font-semibold">The name of the place</p>
+      <p className="text-xl font-semibold">{storeProperty.name}</p>
       {/* <p>{params.id}</p> */}
 
       {/* images of the place and ability to view all images*/}
       <div className="seeAllBtnNList flex items-center mt-4">
         <div className="imagesOfPlace max-w-fit columns-2 md:columns-3 space-y-4">
-          {imagesURL.restrictQuantity().map((image, index) => (
+          {storeProperty.images.restrictQuantity().map((image, index) => (
             // <img src={image} alt="image" key={index} />
             <Image
-              src={image}
+              src={
+                image?.blob !== "string"
+                  ? image?.blob
+                  : "https://a0.muscache.com/im/pictures/e17c7207-25e4-4824-a03b-d2b66847ebed.jpg?im_w=720"
+              }
               alt="image"
               key={index}
               width={500}
               height={500}
               className="rounded-md"
             />
+
+            // <img alt="img" src={image?.blob} className="w-[350px] h-[350px]"/>
           ))}
         </div>
 
@@ -67,19 +78,22 @@ const Page = ({ params }) => {
       <div className="rentMetaData flex items-center divide-x gap-2 mt-4 text-gray-500 text-sm">
         {/* bedrooms */}
         <p>
-          {3} bedroom{true && "s"}
+          {storeProperty?.bedrooms} bedroom{true && "s"}
         </p>
         {/* Meter */}
         <p className="pl-2">{"Personal"} Meter</p>
         {/* Bathrooms */}
-        <p className="pl-2">{2} bathrooms</p>
+        <p className="pl-2">{storeProperty?.bathrooms} bathrooms</p>
       </div>
 
       {/* content section of the details page */}
       <div className="contentSection mt-4  grid grid-cols-3 gap-20">
         {/* left sides */}
         <section className=" col-span-2 ">
-          <RatingsAndBadge />
+          <RatingsAndBadge
+            ratings={storeProperty?.rating}
+            description={storeProperty?.description}
+          />
           {/* LordLord details */}
           <div className="landLordName mt-10 flex items-center gap-4 border-b pb-6">
             {/* image */}
@@ -95,7 +109,10 @@ const Page = ({ params }) => {
             {/* name and date joined */}
             <div className="landLordDetails">
               {/* title */}
-              <p>Rented by Kwamena</p>
+              <p>
+                Rented by {storeProperty?.owner?.first_name}{" "}
+                {storeProperty?.owner?.last_name}
+              </p>
               {/* date joined  */}
               <p className="text-gray-500 text-sm">2 years on realestategh</p>
             </div>
@@ -106,13 +123,7 @@ const Page = ({ params }) => {
             {/* title */}
             <p className="font-semibold text-lg">About this place</p>
             {/* description */}
-            <div>
-              Enjoy an elegant 20 m2 private room in a renovated 160 m2
-              apartment in the heart of Nantes city center in the popular
-              'Graslin' district in Nantes. The charm of the old renovated:
-              ceiling height of 3.60 m, period parquet, black marble fireplace,
-              comfortable bathroom.
-            </div>
+            <div>{storeProperty.description}</div>
           </div>
 
           {/* facilities and amenities */}
@@ -123,66 +134,23 @@ const Page = ({ params }) => {
             {/* offerings */}
             <div className="mt-2 grid grid-cols-2 gap-3">
               {/* facility */}
-              <div className="flex items-center gap-4">
-                {/* logo */}
-                <WifiIcon className="w-4"/>
-                {/* title */}
-                <p>
-                  Free Wifi
-                </p>
-              </div>
-              {/* facility */}
-              <div className="flex items-center gap-4">
-                {/* logo */}
-                <WifiIcon className="w-4"/>
-                {/* title */}
-                <p>
-                  Free Laundry
-                </p>
-              </div>
-              {/* facility */}
-              <div className="flex items-center gap-4">
-                {/* logo */}
-                <WifiIcon className="w-4"/>
-                {/* title */}
-                <p>
-                  Poolside
-                </p>
-              </div>
-              {/* facility */}
-              <div className="flex items-center gap-4">
-                {/* logo */}
-                <WifiIcon className="w-4"/>
-                {/* title */}
-                <p>
-                  Garden
-                </p>
-              </div>
-              {/* facility */}
-              <div className="flex items-center gap-4">
-                {/* logo */}
-                <WifiIcon className="w-4"/>
-                {/* title */}
-                <p>
-                  Security Camera
-                </p>
-              </div>
-              {/* facility */}
-              <div className="flex items-center gap-4">
-                {/* logo */}
-                <WifiIcon className="w-4"/>
-                {/* title */}
-                <p>
-                  Personal Balcony
-                </p>
-              </div>
+              {storeProperty.facilities.map((el) => {
+                return (
+                  <div className="flex items-center gap-4" key={el.name}>
+                    {/* logo */}
+                    <CursorArrowRippleIcon className="w-5" />
+                    {/* title */}
+                    <p className="">{el?.name}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* right sides */}
         <section className="">
-          <ReserveActionCard />
+          <ReserveActionCard price={storeProperty?.price} availableDate={storeProperty?.available_time}/>
         </section>
       </div>
     </div>

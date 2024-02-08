@@ -41,16 +41,18 @@ function LoginForm() {
       .unwrap()
       .then((res) => {
         dispatch(setCredentials(res.token));
-        dispatch(setUserDetails(res.user))
+        dispatch(setUserDetails(res.user));
         // localStorage.setItem("token", res?.token);
         return res;
       })
       .then((res) => {
-        console.log('new user',newUser)
+        console.log("new user", newUser);
         if (newUser?.role?.name == "TENANT") {
           router.push("rentals");
-        } else {
+        } else if (newUser?.role?.name == "LANDLORD") {
           router.push("landlord");
+        } else {
+          // handleLogin(e);
         }
       });
   };

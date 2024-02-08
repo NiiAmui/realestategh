@@ -2,7 +2,7 @@ import React from "react";
 import IconBadge from "../svgs/Badge";
 import IconStar from "../svgs/FullStar";
 
-const RatingsAndBadge = () => {
+const RatingsAndBadge = ({ratings,description}) => {
   return (
     <div className="reviewsAndRatingsCard border p-4 rounded-md grid grid-cols-6 gap-5 divide-x">
       <div className="flex justify-between col-span-5">
@@ -22,10 +22,10 @@ const RatingsAndBadge = () => {
         {/* current Ratings */}
         <div className="currentRatings flex flex-col justify-center items-center">
           {/* number */}
-          <p className="text-lg font-semibold">4.5</p>
+          <p className="text-lg font-semibold">{ratings}</p>
           {/* stars */}
           <div className="flex items-center">
-            {[...Array(5)].map((star, index) => (
+            {[...Array(Math.ceil(+ratings))].map((star, index) => (
               <IconStar key={index} className="h-3"/>
             ))}
           </div>

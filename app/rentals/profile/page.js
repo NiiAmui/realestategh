@@ -6,8 +6,11 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currentUser } from "@/redux/features/auth";
 
+import { useUpdateuserMutation } from "@/redux/features/auth/api";
+
 const page = () => {
   const user = useSelector(currentUser);
+  const [updateUser, { isLoading, error }] = useUpdateuserMutation();
 
   const [firstname, setfirstname] = useState("");
   const [lastName, setlastName] = useState("");
@@ -18,13 +21,34 @@ const page = () => {
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
 
+  const handleUpdateUser = async (e) => {
+    e.preventDefault();
+    await updateUser({
+      userDetails: {
+        birthdate: birthdate,
+        email: email,
+        facebook: facebook,
+        firstName: about,
+        instagram: instagram,
+        lastName: lastName,
+        twitter: twitter,
+      },
+      id: user?.id,
+    });
+  };
+
   useEffect(() => {
     if (user) {
       setfirstname(user.first_name);
       setlastName(user.last_name);
       setEmail(user.email);
+      setFacebook(user?.facebook)
+      setabout(user.about)
+      setBirthdate(user?.birthdate)
+      setInstagram(user.instagram)
+      setTwitter(user.twitter)
     }
-  }, []);
+  }, [user]);
 
   return (
     <div className="grid grid-cols-2 m-4 gap-8 mb-14">
@@ -46,7 +70,7 @@ const page = () => {
 
           {/* Name and Role type */}
           <div className="mt-8 text-center mb-2">
-            <p className="text-sm font-semibold">{`${user.first_name} ${user?.last_name}`}</p>
+            <p className="text-sm font-semibold">{`${user.first_name} ${user.last_name}`}</p>
             <p>
               <span className="text-xs text-gray-400">Account type:</span>{" "}
               <span className="text-xs font-medium">{user?.role?.name}</span>
@@ -104,6 +128,8 @@ const page = () => {
               <input
                 type="date"
                 className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+                value={birthdate}
+                onChange={(e) => setBirthdate(e.target.value)}
               />
             </div>
             {/* about Me */}
@@ -112,13 +138,15 @@ const page = () => {
               <textarea
                 rows={4}
                 className="border w-full rounded px-2 py-1 mt-1"
+                value={about}
+                onChange={(e) => setabout(e.target.value)}
               />
             </div>
           </div>
 
           {/* update button */}
           <div className="mt-4 text-sm">
-            <button className="bg-orange-500 text-white px-8 py-2 rounded">
+            <button className="bg-orange-500 text-white px-8 py-2 rounded" onClick={(e)=>{handleUpdateUser(e)}}>
               Save changes
             </button>
           </div>
@@ -143,6 +171,8 @@ const page = () => {
               type="text"
               placeholder=""
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={twitter}
+              onChange={(e) => setTwitter(e.target.value)}
             />
           </div>
           {/* facebook username */}
@@ -152,6 +182,8 @@ const page = () => {
               type="text"
               placeholder=""
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={facebook}
+              onChange={(e) => setFacebook(e.target.value)}
             />
           </div>
           {/* Instagram username */}
@@ -161,12 +193,14 @@ const page = () => {
               type="text"
               placeholder=""
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
+              value={instagram}
+              onChange={(e) => setInstagram(e.target.value)}
             />
           </div>
 
           {/* update button */}
           <div className="mt-4 text-sm">
-            <button className="bg-orange-500 text-white px-8 py-2 rounded">
+            <button className="bg-orange-500 text-white px-8 py-2 rounded" onClick={(e)=>{handleUpdateUser(e)}}>
               Save changes
             </button>
           </div>
