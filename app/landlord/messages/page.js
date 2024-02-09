@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import Image from "next/image";
 
@@ -7,12 +9,21 @@ const demoConversation = [
   "Hello, crazy people are interesting, bla bla bla",
 ];
 
+import { useFetchMessagesQuery } from "@/redux/features/landlord/api";
+
+import { useSelector } from "react-redux";
+import { currentUser } from "@/redux/features/auth";
+
 import {
   MagnifyingGlassIcon,
   ChatBubbleLeftIcon,
 } from "@heroicons/react/24/outline";
 
-const page = () => {
+const Messages = () => {
+  const userProfile = useSelector(currentUser)
+  const { data, isLoading, } = useFetchMessagesQuery(userProfile?.id)
+
+
   return (
     <div className="m-6 grid grid-cols-6 border h-[80vh]">
       {/* left sidebar */}
@@ -126,4 +137,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Messages;

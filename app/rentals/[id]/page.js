@@ -24,15 +24,15 @@ const imagesURL = [
 ];
 
 // function to limit the number of notifications shown at a time
-Array.prototype.restrictQuantity = function () {
-  let result = this;
-  if (this.length > 5) {
-    result = this.slice(0, 5);
-  } else {
-    return result;
-  }
-  return result;
-};
+// Array.prototype.restrictQuantity = function () {
+//   let result = this;
+//   if (this.length > 5) {
+//     result = this.slice(0, 5);
+//   } else {
+//     return result;
+//   }
+//   return result;
+// };
 
 const Page = ({ params }) => {
   const storeProperty = useSelector(property);
@@ -45,8 +45,8 @@ const Page = ({ params }) => {
 
       {/* images of the place and ability to view all images*/}
       <div className="seeAllBtnNList flex items-center mt-4">
-        <div className="imagesOfPlace max-w-fit columns-2 md:columns-3 space-y-4">
-          {storeProperty.images.restrictQuantity().map((image, index) => (
+        <div className="imagesOfPlace max-w-fit columns-2 md:columns-4 space-y-4">
+          {storeProperty.images.map((image, index) => (
             // <img src={image} alt="image" key={index} />
             <Image
               src={
@@ -59,6 +59,7 @@ const Page = ({ params }) => {
               width={500}
               height={500}
               className="rounded-md"
+              unoptimized
             />
 
             // <img alt="img" src={image?.blob} className="w-[350px] h-[350px]"/>
@@ -66,8 +67,7 @@ const Page = ({ params }) => {
         </div>
 
         {/* see all images section */}
-        <div className=" w-[300px] min-h-full flex justify-center">
-          {/* Btn to see all images */}
+        <div className=" min-w-fit min-h-full flex justify-center">
           <button className="btn rounded border-[1.5px] px-4 py-2 text-gray-600 cursor-pointer">
             See all images
           </button>

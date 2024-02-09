@@ -18,8 +18,16 @@ const landlordApiSlice = apiSlice.injectEndpoints({
       providesTags: ['properties']
       // invalidatesTags:['auth','properties','message']
     }),
+    fetchMessages: builder.query({
+      query: (id) => ({
+        url: `/chat/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["messages"],
+      // invalidatesTags:['auth','properties','message']
+    }),
   }),
 });
 
 
-export const {useAddPropertyMutation,useFetchPropertiesQuery} = landlordApiSlice
+export const {useAddPropertyMutation,useFetchPropertiesQuery,useFetchMessagesQuery} = landlordApiSlice

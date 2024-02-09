@@ -15,7 +15,7 @@ function DropDown({ placeholder, label, setState, state, list, updateItem, descr
                 updateItem(state);
               }
             }}
-            value={state}
+            value={state || ''}
             placeholder={placeholder || `Enter value`}
             className="input min-w-full rounded border border-gray-400 relative h-[45px] mt-1 px-2"
             {...props}

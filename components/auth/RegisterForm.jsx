@@ -4,6 +4,9 @@ import DateInput from "./inputs/DateInput";
 import EmailInput from "./inputs/EmailInput";
 import PasswordInput from "./inputs/PasswordInput";
 
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -18,9 +21,8 @@ const userTypes = [
   { description: "LandLord", value: "LANDLORD" },
 ];
 
-function RegisterForm({setcurrentView}) {
-const router = useRouter()
-
+function RegisterForm({ setcurrentView }) {
+  const router = useRouter();
 
   const [firstName, setfirstName] = useState(null);
   const [lastName, setlastName] = useState(null);
@@ -30,7 +32,7 @@ const router = useRouter()
   const [userType, setUserType] = useState(null);
 
   const dispatch = useDispatch();
-  const [register] = useRegisterMutation();
+  const [register, {isLoading}] = useRegisterMutation();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -40,9 +42,11 @@ const router = useRouter()
       email: email,
       password: password,
       role: userType,
-    }).unwrap().then(()=>{
-      setcurrentView(false)
-    });
+    })
+      .unwrap()
+      .then(() => {
+        setcurrentView(false);
+      });
   };
   return (
     <form>
@@ -102,7 +106,20 @@ const router = useRouter()
           className="w-full bg-primary text-white h-[45px] rounded-[5px]"
           onClick={handleRegister}
         >
-          Sign Up
+          {isLoading && (
+            <Spin
+              indicator={
+                <LoadingOutlined
+                  style={{
+                    fontSize: 24,
+                    color: "white",
+                  }}
+                  spin
+                />
+              }
+            />
+          )}
+          {!isLoading && <p>Sign Up</p>}
         </button>
       </div>
     </form>

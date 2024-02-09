@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-import { useLoginMutation, useTryPingQuery } from "@/redux/features/auth/api";
+import { useLoginMutation, } from "@/redux/features/auth/api";
 
 import {
   currentUser,
@@ -17,13 +17,15 @@ import { useSelector } from "react-redux";
 
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useEffect } from "react";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 // import { login } from "@/redux/features/auth/api";
 
 function LoginForm() {
   const [email, setemail] = useState(null);
   const [password, setpassword] = useState(null);
 
-  const [login] = useLoginMutation();
+  const [login, {isLoading}] = useLoginMutation();
 
   const router = useRouter();
 
@@ -72,7 +74,18 @@ function LoginForm() {
           className="w-full bg-primary text-white h-[45px] rounded-[5px]"
           onClick={handleLogin}
         >
-          Sign In
+          {isLoading && <Spin
+            indicator={
+              <LoadingOutlined
+                style={{
+                  fontSize: 24,
+                  color: 'white'
+                }}
+                spin
+              />
+            }
+          />}
+         {!isLoading && <p>Sign In</p>}
         </button>
       </div>
     </form>

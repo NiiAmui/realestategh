@@ -11,7 +11,12 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useAddPropertyMutation } from "@/redux/features/landlord/api";
 
-const numbers = [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+
+const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+import { useRouter } from "next/navigation";
 
 const availableFacilities = [
   "Swimming Pool",
@@ -26,9 +31,11 @@ const availableFacilities = [
 ];
 
 import React from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
 
-const page = () => {
+const AddProperty = () => {
   const [addProperty, { isLoading, error }] = useAddPropertyMutation();
+  const router = useRouter()
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -73,12 +80,12 @@ const page = () => {
       facilities: facilities.map((el) => ({ description: el, name: el })),
       city,
       kitchens: +kitchens,
-      livingRooms : +livingRooms,
+      livingRooms: +livingRooms,
       images: fileList.map((el) => ({
         // el?.thumbUrl
         blob: el?.thumbUrl,
       })),
-    });
+    }).then(unwrapResult).then(()=>router.push('/properties'));
   };
 
   return (
@@ -91,9 +98,29 @@ const page = () => {
           <p className="font-medium text-lg">Property Details</p>
 
           {/* Publish Property */}
-          <button className="publishProperty flex items-center gap-2 px-3 py-2 bg-orange-500 text-white rounded text-sm" onClick={(e)=>{handleAddProperty(e)}}>
+          <button
+            className="publishProperty flex items-center gap-2 px-3 py-2 bg-orange-500 text-white rounded text-sm w-[150px] h-[45px]]"
+            onClick={(e) => {
+              handleAddProperty(e);
+            }}
+          >
             <CloudArrowUpIcon className="w-4" />
-            <p>Publish Property</p>
+            <p className="items-center justify-self-center">
+              {isLoading && (
+                <Spin
+                  indicator={
+                    <LoadingOutlined
+                      style={{
+                        fontSize: 24,
+                        color: "white",
+                      }}
+                      spin
+                    />
+                  }
+                />
+              )}
+              {!isLoading && <p>publish</p>}
+            </p>
           </button>
         </div>
 
@@ -342,7 +369,7 @@ const page = () => {
             <input
               type="number"
               placeholder="12000"
-              value={(price/12) || 0}
+              value={price / 12 || 0}
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
               disabled
             />
@@ -390,4 +417,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AddProperty;
