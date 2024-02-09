@@ -7,6 +7,8 @@ import PropertyCard from "@/components/landlord/properties/PropertyCard";
 
 import { useRouter } from "next/navigation";
 import { useFetchPropertiesQuery } from "@/redux/features/landlord/api";
+import { currentUser } from "@/redux/features/auth";
+import { useSelector } from "react-redux";
 
 const rentals = [
   {
@@ -54,6 +56,8 @@ const rentals = [
 const Properties = () => {
   const router = useRouter();
 
+  const user = useSelector(currentUser)
+
   const { data, isLoading, } = useFetchPropertiesQuery();
 
   console.log('data',data)
@@ -85,7 +89,7 @@ const Properties = () => {
       <div >
         {/* if there are properties */}
         {data && <div className="propertiesContainer mt-4 flex flex-col gap-4">
-          {data.map((rental, idx) => (
+          {data.filter(el=>el.owner.id==user.id).map((rental, idx) => (
             <PropertyCard rental={rental} key={idx} />
           ))}
         </div>}

@@ -19,8 +19,8 @@ const landlordApiSlice = apiSlice.injectEndpoints({
       // invalidatesTags:['auth','properties','message']
     }),
     fetchMessages: builder.query({
-      query: (id) => ({
-        url: `/chat/${id}`,
+      query: () => ({
+        url: `/chat`,
         method: "GET",
       }),
       providesTags: ["messages"],
