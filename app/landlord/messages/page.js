@@ -137,12 +137,11 @@ const Messages = () => {
               <div className="p-4 bg-white rounded-full flex items-center justify-center">
                 <ChatBubbleLeftIcon className="w-20 text-gray-600" />
               </div>
-              
             </div>
           </div>
         )}
 
-          {/* If there are no messages at all */}
+        {/* If there are no messages at all */}
         {!data?.messages && (
           <div className="noChat object-cover h-full bg-[url('https://img.freepik.com/free-vector/love-mail-pattern_23-2147495663.jpg?w=1380&t=st=1705987828~exp=1705988428~hmac=8763899f71fdc0285442ecffac4a0c4bb5bbe766dd35ad949a815abf94d10bcc')]">
             {/* <Image
@@ -170,19 +169,20 @@ const Messages = () => {
         {/* if chat has been selected */}
         {selectedChat && (
           <div className="chatWindow p-4  h-full flex flex-col gap-3">
-            {demoConversation.map((el, idx) => (
-              <div key={idx} className="">
-                <p
-                  className={
-                    idx / 2 == 0
-                      ? "bg-gray-300 text-gray-900 w-fit px-2 py-1 rounded text-sm max-w-[50%]"
-                      : "bg-emerald-700 w-[50%] float-right text-white max-w-fit px-2 py-1 rounded text-sm"
-                  }
-                >
-                  {el}
-                </p>
-              </div>
-            ))}
+            {/* {demoConversation.map((el, idx) => ( */}
+            <div className="">
+              <p
+                // className={
+                //   idx / 2 == 0
+                //     ? "bg-gray-300 text-gray-900 w-fit px-2 py-1 rounded text-sm max-w-[50%]"
+                //     : "bg-emerald-700 w-[50%] float-right text-white max-w-fit px-2 py-1 rounded text-sm"
+                // }
+                className="bg-emerald-700 w-[50%] float-right text-white max-w-fit px-2 py-1 rounded text-sm"
+              >
+                {selectedChat.message}
+              </p>
+            </div>
+            {/* ))} */}
           </div>
         )}
       </section>
