@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['a0.muscache.com','img.freepik.com'],
+        domains: ['a0.muscache.com','img.freepik.com','content.jdmagicbox.com'],
     },
     async headers() {
         return [

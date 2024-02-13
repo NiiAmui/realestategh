@@ -85,7 +85,7 @@ const AddProperty = () => {
         // el?.thumbUrl
         blob: el?.thumbUrl,
       })),
-    }).then(unwrapResult).then(()=>router.push('/properties'));
+    }).then(unwrapResult).then(()=>router.push('/landlord/properties'));
   };
 
   return (
@@ -352,7 +352,7 @@ const AddProperty = () => {
 
           {/* Annual Payment or price */}
           <div className="mt-4 text-gray-600">
-            <label className="text-sm ">Annual Payment</label>
+            <label className="text-sm ">Monthly Installment</label>
             <input
               type="number"
               placeholder="12000"
@@ -365,11 +365,11 @@ const AddProperty = () => {
           </div>
           {/* Monthly Payment */}
           <div className="mt-4 text-gray-600">
-            <label className="text-sm ">Monthly Installment</label>
+            <label className="text-sm ">Annual Payment</label>
             <input
               type="number"
               placeholder="12000"
-              value={price / 12 || 0}
+              value={price * 12 || 0}
               className="border w-full rounded px-2 py-1 mt-1  h-[35px]"
               disabled
             />

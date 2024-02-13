@@ -99,7 +99,7 @@ const Page = ({ params }) => {
             {/* image */}
             <Image
               src={
-                "https://a0.muscache.com/im/pictures/user/3816a6ef-5cc9-40ed-ae47-406646daa103.jpg?im_w=240"
+                "https://content.jdmagicbox.com/comp/allahabad/b4/0532px532.x532.190510161607.y8b4/catalogue/n-i-real-estate-civil-lines-allahabad-estate-agents-yw16py6790.jpg"
               }
               alt="image"
               width={50}
