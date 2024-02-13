@@ -11,11 +11,16 @@ const ReserveActionCard = ({price,availableDate}) => {
         <p className="text-gray-500 italic font-normal text-sm">month</p>
       </div>
       {/* date Pickers */}
-      <div className="border rounded mt-2">
+      <div className="border rounded mt-2 grid grid-cols-2 divide-x">
         {/* date available */}
         <div className="checkInDate text-left p-3">
           <p className="font-normal text-xs">Date Available</p>
           <p className="mt-1 font-medium">{dayjs(availableDate).format('DD MMM YYYY')}</p>
+        </div>
+        {/* date available */}
+        <div className="checkInDate text-left p-3 text-right">
+          <p className="font-normal text-xs">Down Payment</p>
+          <p className="mt-1 font-medium">{(price * 12)*.20}</p>
         </div>
       </div>
 

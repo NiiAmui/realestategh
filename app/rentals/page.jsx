@@ -33,7 +33,7 @@ function Home() {
   const filterByRegion =(data)=>{
     if(region){
       const filteredRegion = data.filter(el=>el.region == region);
-      console.log(('ffffff',filteredRegion));
+      // console.log(('ffffff',filteredRegion));
     }else{
       return data;
     }

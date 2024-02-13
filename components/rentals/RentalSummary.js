@@ -16,7 +16,9 @@ const RentalSummary = () => {
         {landlordProperty.images.length && (
           <Image
             src={
-              landlordProperty?.images[0]?.blob !== 'string'? landlordProperty?.images[0]?.blob :'https://a0.muscache.com/im/pictures/miso/Hosting-668146487515150072/original/8ff2a532-e0cd-41a2-9164-554c4d9eb28a.jpeg?im_w=720'
+              landlordProperty?.images[0]?.blob !== "string"
+                ? landlordProperty?.images[0]?.blob
+                : "https://a0.muscache.com/im/pictures/miso/Hosting-668146487515150072/original/8ff2a532-e0cd-41a2-9164-554c4d9eb28a.jpeg?im_w=720"
             }
             alt="image"
             width={80}
@@ -69,6 +71,9 @@ const RentalSummary = () => {
           <p>Yearly cost</p>
           {/* price */}
           <p>{+landlordProperty.price * 12}</p>
+          <p>Down Payment</p>
+          {/* price */}
+          <p>{+landlordProperty.price * 12 * 0.2}</p>
         </div>
       </div>
 
