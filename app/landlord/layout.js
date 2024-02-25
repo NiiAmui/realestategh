@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <div >
         
       <div>
-        <Providers >
+        {/* <Providers > */}
           <div className="w-full flex min-h-screen">
             {/* left drawer */}
             <SideDrawer />
@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
               <div >{children}</div>
             </div>
           </div>
-        </Providers>
+        {/* </Providers> */}
       </div>
     </div>
   );

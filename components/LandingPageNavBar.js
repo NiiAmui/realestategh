@@ -19,10 +19,10 @@ const LandingPageNavBar = () => {
 
         {/* MidSection */}
         <div className="p-2 flex  divide-x divide-gray-500 border border-gray-500 rounded-lg cursor-pointer">
-          <Link href={"/rentals"}>
-            <p className="px-3 font-medium">LandLords</p>
+          <Link href={"/rentals/about"}>
+            <p className="px-3 font-medium hover:text-orange-500">About Us</p>
           </Link>
-          <Link href={"/rentals"}>
+          <Link href={"/rentals"} className="hover:text-orange-500">
             <p className="px-3 font-medium">Find a Place</p>
           </Link>
           {/* <p className="px-3 font-medium">Anywhere</p> */}
@@ -33,7 +33,7 @@ const LandingPageNavBar = () => {
           {/* login */}
           {!loginStatus && (
             <Link href={"/auth"}>
-              <div className="flex text-sm divide-x divide-gray-500 cursor-pointer">
+              <div className="flex text-sm divide-x divide-gray-500 cursor-pointer hover:text-orange-500">
                 <p className="px-2 font-medium">Sign In</p>
                 <p className="px-2 font-medium">Sign Up</p>
               </div>

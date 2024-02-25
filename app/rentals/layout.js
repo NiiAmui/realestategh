@@ -14,10 +14,10 @@ export default function RootLayout({ children }) {
   return (
     <section>
       <div className={inter.className}>
-        <Providers>
+        {/* <Providers> */}
           {!pathname.includes("auth") && <TopNavBar />}
           {children}
-        </Providers>
+        {/* </Providers> */}
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname,useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import { useSelector } from "react-redux";
@@ -31,13 +31,20 @@ const TopNavBar = () => {
   const loginStatus = useSelector(isLoggedIn);
   const params = useParams();
   const pathname = usePathname();
-  useEffect(() => {}, [pathname]);
+  const router = useRouter()
+
+  // useEffect(() => {}, [pathname]);
 
   const [openFilter, setopenFilter] = useState(false);
 
   const closeFilter = () => {
     setopenFilter(false);
   };
+
+  const navigateToAboutPage = ()=>{
+    router.push('/rentals/about')
+  }
+
   return (
     <>
       <div className="w-full flex justify-between lg:px-8 py-4 border-b items-center">
@@ -46,9 +53,9 @@ const TopNavBar = () => {
 
         {/* MidSection */}
         {pathname !== "/rentals/profile" && <div className="p-2 flex  divide-x border rounded-lg">
-          <p className="px-3 font-medium">Anywhere</p>
-          <p className="px-3 font-medium">Anytime</p>
-          <p className="px-3 font-medium">Anywhere</p>
+          <p className="px-3 font-medium cursor-pointer" onClick={()=>{router.push('/rentals')}}>Anywhere</p>
+          <p className="px-3 font-medium cursor-pointer hover:text-orange-500" onClick={navigateToAboutPage}>About</p>
+          <p className="px-3 font-medium cursor-pointer" onClick={()=>{router.push('/rentals')}}>Anywhere</p>
         </div>}
 
         {/* Profile */}
@@ -56,7 +63,7 @@ const TopNavBar = () => {
           {/* login */}
           {!loginStatus && (
             <Link href={"/auth"}>
-              <div className="flex text-sm divide-x cursor-pointer">
+              <div className="flex text-sm divide-x cursor-pointer hover:text-orange-500">
                 <p className="px-2 font-medium">Sign In</p>
                 <p className="px-2 font-medium">Sign Up</p>
               </div>
@@ -75,6 +82,7 @@ const TopNavBar = () => {
         pathname !== "/rentals/reservation" &&
         pathname !== "/rentals/profile" &&
         pathname !== "/rentals/tour/rentals/rental" &&
+        pathname !== "/rentals/about" &&
         pathname !== "/rentals/tour/rentals/rental/rental" && (
           <div className="filters justify-between lg:px-8 py-4 mt-2 text-sm text-gray-600 flex gap-6">
             {/* AMENITIES OR FACILITIES */}
