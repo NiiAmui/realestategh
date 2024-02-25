@@ -1,6 +1,6 @@
 'use client'
 
-import { CubeTransparentIcon,HomeModernIcon,EnvelopeIcon } from "@heroicons/react/24/outline";
+import { CubeTransparentIcon,HomeModernIcon,UserGroupIcon } from "@heroicons/react/24/outline";
 import React from "react";
 
 import { useEffect } from "react";
@@ -24,7 +24,7 @@ const SideDrawer = () => {
       <div className="mt-10 text-sm text-gray-700">
         <ul>
           <li className="">
-            <Link href="/landlord">
+            <Link href="/admin">
               <div className={`linkContainer rounded flex gap-2 px-3 py-2 ${pathname==='/admin'?'bg-gray-200':''}`}>
                 {/* icon */}
                 <CubeTransparentIcon className="w-4" />
@@ -33,8 +33,8 @@ const SideDrawer = () => {
             </Link>
           </li>
           <li className="mt-2">
-            <Link href="/landlord/properties">
-              <div className={`linkContainer rounded flex gap-2 px-3 py-2 ${pathname==='/landlord/properties'?'bg-gray-200':''}`}>
+            <Link href="/admin/landlords">
+              <div className={`linkContainer rounded flex gap-2 px-3 py-2 ${pathname.includes('/admin/landlords')?'bg-gray-200':''}`}>
                 {/* icon */}
                 <HomeModernIcon className="w-4" />
                 <p>Landlords</p>
@@ -42,14 +42,23 @@ const SideDrawer = () => {
             </Link>
           </li>
           <li className="mt-2">
+            <Link href="/admin/tenants">
+              <div className={`linkContainer rounded flex gap-2 px-3 py-2 ${pathname.includes('/admin/tenants')?'bg-gray-200':''}`}>
+                {/* icon */}
+                <UserGroupIcon className="w-4" />
+                <p>Tenants</p>
+              </div>
+            </Link>
+          </li>
+          {/* <li className="mt-2">
             <Link href="/landlord/messages">
               <div className={`linkContainer rounded flex gap-2 px-3 py-2 ${pathname==='/landlord/messages'?'bg-gray-200':''}`}>
-                {/* icon */}
+              
                 <EnvelopeIcon className="w-4" />
                 <p>Messages</p>
               </div>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>
