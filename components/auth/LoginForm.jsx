@@ -54,7 +54,7 @@ function LoginForm() {
         } else if (newUser?.role?.name == "LANDLORD") {
           router.push("landlord");
         } else {
-          // handleLogin(e);
+          router.push("admin");
         }
       });
   };

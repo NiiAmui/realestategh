@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React,{useEffect} from "react";
 
 import { useDispatch } from "react-redux";
 
@@ -10,9 +10,24 @@ import { regionsOfGhana } from "@/components/auth/RegionTimeFilter";
 
 import { useRouter } from "next/navigation";
 
+import { useSelector } from "react-redux";
+
 const page = () => {
   const dispatch = useDispatch()
   const router = useRouter()
+  const newUser = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (newUser?.role?.name == "TENANT") {
+      router.push("rentals");
+    } else if (newUser?.role?.name == "LANDLORD") {
+      router.push("landlord");
+    } else {
+      router.push("admin");
+    }
+
+    return () => {};
+  }, []);
 
   return (
     <div className="bg-[url('https://images.pexels.com/photos/298842/pexels-photo-298842.jpeg')] bg-cover min-h-screen ">

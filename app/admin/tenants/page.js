@@ -1,10 +1,13 @@
-import LandLordCard from "@/components/admin/TenantCard";
+'use client'
+
+import TenantCard from "@/components/admin/TenantCard";
 import React from "react";
 
+import { useFetchTenantsQuery } from "@/redux/features/admin/api";
 
-const someLandlords = [1, 2, 3, 4];
 
 const page = () => {
+  const { data, isLoading } = useFetchTenantsQuery();
 
   return (
     <div className="p-4">
@@ -12,11 +15,21 @@ const page = () => {
       <p className="text-lg font-medium text-center">Available Tenants</p>
 
       {/* cards of landlords */}
-      <div className="mt-10 max-w-fit flex gap-6">
-        {someLandlords.map((el) => (
-          <LandLordCard key={el} landlordId={el}/>
+     {!isLoading && <div className="mt-10 max-w-fit flex gap-6">
+        {data.map((el) => (
+          <TenantCard key={el.id} tenant={el} />
         ))}
-      </div>
+      </div>}
+
+      {/* if there are no properties */}
+      {!data && !isLoading && (
+          <div className="mt-10 text-center">
+            This Landlord has no Properties uploaded yet...
+          </div>
+        )}
+
+      {/* if is loading */}
+      {isLoading && <div>Loading...</div>}
     </div>
   );
 };

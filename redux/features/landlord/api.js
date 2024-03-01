@@ -10,9 +10,9 @@ const landlordApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags:['properties',]
     }),
-    fetchProperties: builder.query({
-      query: () => ({
-        url: "/properties",
+    fetchOwnerProperties: builder.query({
+      query: (id) => ({
+        url: `/properties/owner/${id}`,
         method: "GET",
       }),
       providesTags: ['properties']
@@ -30,4 +30,4 @@ const landlordApiSlice = apiSlice.injectEndpoints({
 });
 
 
-export const {useAddPropertyMutation,useFetchPropertiesQuery,useFetchMessagesQuery} = landlordApiSlice
+export const {useAddPropertyMutation,useFetchOwnerPropertiesQuery,useFetchMessagesQuery} = landlordApiSlice

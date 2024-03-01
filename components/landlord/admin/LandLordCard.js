@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { Bars2Icon } from "@heroicons/react/24/outline";
 
-const LandLordCard = ({ landlordId }) => {
+const LandLordCard = ({ landlord }) => {
   const componentRef = useRef(null);
   const router = useRouter();
 
@@ -36,7 +36,7 @@ const LandLordCard = ({ landlordId }) => {
       {/* drop down */}
       {showMenu && (
         <div
-          className="px-4 py-1 bg-white shadow absolute top-7 z-10"
+          className="px-4 py-1 bg-white shadow absolute top-7 z-10 cursor-pointer"
           ref={componentRef}
           onClick={() => {
             console.log("make inactive");
@@ -47,7 +47,9 @@ const LandLordCard = ({ landlordId }) => {
       )}
       <div
         className="w-[200px] border relative"
-        onClick={() => router.push(`/admin/landlords/properties/${landlordId}`)}
+        onClick={() =>
+          router.push(`/admin/landlords/properties/${landlord.id}`)
+        }
       >
         {/* user inage */}
         <Image
@@ -57,9 +59,9 @@ const LandLordCard = ({ landlordId }) => {
           alt="landlord image"
         />
         {/* landlord's name */}
-        <div className="text-center mt-2 font-medium">Samuel Jackson</div>
+        <div className="text-center mt-2 font-medium">{`${landlord.first_name} ${landlord.last_name}`}</div>
         {/* description */}
-        <div className="p-2 text-sm">Some nice things about the landlord</div>
+        <div className="p-2 text-sm text-center">{landlord.email}</div>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import React from "react";
 import OtherNotifications from "../landlord/OtherNotifications";
+import AdminProfile from './AdminProfile'
 import { usePathname } from "next/navigation";
 
 import dayjs from "dayjs";
@@ -17,10 +18,10 @@ const AdminTopNavbar = () => {
       <div className="w-full grid grid-cols-3 py-4 items-center text-sm">
         {/* page title */}
         <p className="">
-          {pathname.includes("message")
-            ? "Messages"
-            : pathname.includes("properties")
-            ? "Properties"
+          {pathname.includes("landlords")
+            ? "Landlords"
+            : pathname.includes("tenants")
+            ? "Tenants"
             : "Dashboard"}
         </p>
 
@@ -30,6 +31,7 @@ const AdminTopNavbar = () => {
         {/* Notifications and profile */}
         <div className="flex items-center gap-2.5 justify-end">
           <OtherNotifications />
+          <AdminProfile /> 
         </div>
       </div>
     </div>

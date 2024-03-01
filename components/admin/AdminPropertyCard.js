@@ -25,7 +25,7 @@ const PropertyCard = ({ rental }) => {
 
         <img
           alt="image"
-          src={rental?.image}
+          src={rental?.images[0]?.blob}
           className="min-w-full object-cover rounded-md"
         />
       </div>
@@ -38,12 +38,12 @@ const PropertyCard = ({ rental }) => {
           <p className="text-lg font-medium">{rental?.name}</p>
           {/* rental status */}
           <div className="rentalStatus text-right">
-            {rental.tenant && (
+            {rental?.tenant && (
               <p className="bg-green-300 w-fit px-3 py-1 rounded-lg text-white text-xs">
                 Occupied
               </p>
             )}
-            {!rental.tenant && (
+            {!rental?.tenant && (
               <p className="bg-red-300 w-fit px-3 py-1 rounded-lg text-white text-xs">
                 UnOccupied
               </p>
@@ -51,7 +51,7 @@ const PropertyCard = ({ rental }) => {
           </div>
           {/* rent per month */}
           <div className="text-right">
-            <p className="font-medium">${rental.rent}</p>
+            <p className="font-medium">${rental?.price}</p>
             <p className="text-xs text-gray-400">per month</p>
           </div>
         </div>
@@ -60,7 +60,7 @@ const PropertyCard = ({ rental }) => {
           {/* icon */}
           <MapPinIcon className="w-4" />
           {/* location Name */}
-          <p className="text-xs">{rental.location}</p>
+          <p className="text-xs">{rental.address}</p>
         </div>
         {/* Lower info cards */}
         <div className="lowerInfoCards mt-4 flex justify-between divide-x">
@@ -82,7 +82,7 @@ const PropertyCard = ({ rental }) => {
             {/* Details */}
             <div className="details">
               <p className="text-xs text-gray-400">Down Payment</p>
-              <p className="font-medium">20 %</p>
+              <p className="font-medium">{0.2 * (rental.price * 12)}</p>
             </div>
           </div>
           {/* Tenant */}
