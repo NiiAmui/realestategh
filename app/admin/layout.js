@@ -10,13 +10,10 @@ import { Providers } from "@/redux/provider";
 import { usePathname } from "next/navigation";
 import SideDrawer from "@/components/admin/SideDrawer";
 
-
 import { useEffect } from "react";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  
-  
 
   return (
     <div>

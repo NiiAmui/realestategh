@@ -16,7 +16,7 @@ const page = () => {
 
       {/* cards of landlords */}
      {!isLoading && <div className="mt-10 max-w-fit flex gap-6">
-        {data.map((el) => (
+        {data?.map((el) => (
           <TenantCard key={el.id} tenant={el} />
         ))}
       </div>}

@@ -1,10 +1,13 @@
-'use client'
+"use client";
 
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 
-import { setSelectedRegion,setSelectedDuration } from "@/redux/features/tenant";
+import {
+  setSelectedRegion,
+  setSelectedDuration,
+} from "@/redux/features/tenant";
 
 import { regionsOfGhana } from "@/components/auth/RegionTimeFilter";
 
@@ -13,8 +16,8 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
 const page = () => {
-  const dispatch = useDispatch()
-  const router = useRouter()
+  const dispatch = useDispatch();
+  const router = useRouter();
   const newUser = useSelector((state) => state.auth.user);
 
   useEffect(() => {
@@ -22,8 +25,10 @@ const page = () => {
       router.push("rentals");
     } else if (newUser?.role?.name == "LANDLORD") {
       router.push("landlord");
-    } else {
+    } else if (newUser?.role?.name == "ADMIN") {
       router.push("admin");
+    } else {
+      return;
     }
 
     return () => {};
@@ -51,13 +56,18 @@ const page = () => {
                 id="cars"
                 className="h-full px-2 rounded-s rounded-e"
                 placeholder="choose Region"
-                onChange={(e)=>{dispatch(setSelectedRegion(e.target.value))}}
+                onChange={(e) => {
+                  dispatch(setSelectedRegion(e.target.value));
+                }}
               >
                 <option value="" disabled>
                   choose Region
                 </option>
-                {regionsOfGhana.map(region=>(<option value={region?.name} key={region.name}>{region?.name}</option>))}
-                
+                {regionsOfGhana.map((region) => (
+                  <option value={region?.name} key={region.name}>
+                    {region?.name}
+                  </option>
+                ))}
               </select>
               {/* Duration */}
               <select
@@ -65,7 +75,9 @@ const page = () => {
                 id="cars"
                 className="h-full px-2"
                 placeholder="choose Region"
-                onChange={(e)=>{dispatch(setSelectedDuration(e.target.value))}}
+                onChange={(e) => {
+                  dispatch(setSelectedDuration(e.target.value));
+                }}
               >
                 <option value="" disabled>
                   choose Region
@@ -76,7 +88,10 @@ const page = () => {
               </select>
 
               {/* search Btn */}
-              <button className="bg-yellow-500 ml-2 text-white h-full rounded" onClick={()=>router.push('/rentals')}>
+              <button
+                className="bg-yellow-500 ml-2 text-white h-full rounded"
+                onClick={() => router.push("/rentals")}
+              >
                 Search
               </button>
             </div>

@@ -66,13 +66,14 @@ const LandlordProperty = () => {
     <div className="p-4 pb-20">
       {/* header */}
       <p className="text-lg font-medium text-center">
-        Samuel Jackson's Properties
+        {data && data[0]?.owner?.first_name} Properties
+        {console.log(data)}
       </p>
 
       {/* PROPERTIES */}
       <div>
         {/* if there are properties */}
-        {(data || data !== null || data.length > 0) && (!isLoading) && (
+        {(data || data !== null || data.length > 0) && !isLoading && (
           <div className="propertiesContainer mt-4 flex flex-col gap-4">
             {data?.map((rental, idx) => (
               <AdminPropertyCard rental={rental} key={idx} />

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "concurrently \"npm run dev\" \"nodemon --exec ./realestate\"",
     "lint": "next lint"
   },
   "dependencies": {
